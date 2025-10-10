@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portofolio | NAURAHDF</title>
+    <meta
+      name="description"
+      content="Portofolio pribadi - Universitas Airlangga"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0a0a0a;
+        --muted: #e5e7eb; /* netral */
+        --accent: #d1bbff; /* aksen utama */
+        --border: #d4d4d8;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        --radius: 14px;
+        --chip-bg: #f4f4f5;
+      }
+      html[data-theme="dark"] {
+        --bg: #0b0b0b; /* black */
+        --text: #eaeaea; /* text */
+        --muted: #151515; /* netral */
+        --accent: #d1bbff;
+        --border: #222222;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        --chip-bg: #141414;
+      }
+
+      /* Reset dan base */
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Ubuntu, Cantarell, "Helvetica Neue", Arial;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      svg {
+        display: block;
+      }
+
+      .container {
+        width: min(1120px, 92%);
+        margin-inline: auto;
+      }
+
+      /* Nav */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(180%) blur(10px);
+        background: color-mix(in oklab, var(--bg) 84%, transparent);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        gap: 16px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .brand-badge {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: var(--accent);
+        display: grid;
+        place-items: center;
+        color: #000;
+        font-size: 14px;
+        font-weight: 800;
+        box-shadow: var(--shadow);
+      }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+        align-items: center;
+      }
+      .nav-links a {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+      }
+      .nav-links a:hover {
+        border-color: var(--border);
+        background: var(--muted);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--muted);
+        color: var(--text);
+        transition: transform 0.15s ease, background 0.2s ease, border 0.2s ease;
+        box-shadow: var(--shadow);
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #111;
+        border-color: transparent;
+        font-weight: 700;
+      }
+      .btn-ghost {
+        background: transparent;
+        border-color: var(--border);
+      }
+      .icon-16 {
+        width: 16px;
+        height: 16px;
+      }
+      .icon-20 {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* Sections */
+      section {
+        padding: 64px 0;
+      }
+      .section-head {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .section-title {
+        font-size: clamp(22px, 2.4vw, 32px);
+        font-weight: 800;
+        letter-spacing: 0.2px;
+      }
+      .section-sub {
+        color: #888;
+        font-size: 14px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 48px 0 18px;
+      }
+      .hero-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 860px) {
+        .hero-grid {
+          grid-template-columns: 1.2fr 0.8fr;
+          align-items: center;
+        }
+      }
+      .hero-title {
+        font-size: clamp(32px, 5vw, 56px);
+        line-height: 1.1;
+        letter-spacing: -0.4px;
+        font-weight: 900;
+        margin: 0 0 12px;
+      }
+      .hero-quote {
+        color: #9ca3af;
+        font-style: italic;
+        margin: 12px 0 22px;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .hero-photo {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--muted);
+        box-shadow: var(--shadow);
+      }
+
+      /* About */
+      .about-wrap {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 860px) {
+        .about-wrap {
+          grid-template-columns: 1.2fr 0.8fr;
+        }
+      }
+      .about-card,
+      .embed,
+      .card,
+      .timeline,
+      .gallery,
+      .reflection,
+      .contact-card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: color-mix(in oklab, var(--bg) 94%, transparent);
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+      .muted {
+        color: #9ca3af;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .chip {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: var(--chip-bg);
+        border: 1px solid var(--border);
+        font-size: 12px;
+      }
+      .about-photos {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Embed PDF */
+      .embed iframe {
+        width: 100%;
+        min-height: 520px;
+        border: none;
+        border-radius: 12px;
+        background: var(--muted);
+      }
+      .embed .hint {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #9ca3af;
+      }
+
+      /* Projects - carousel */
+      .carousel {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background: color-mix(in oklab, var(--bg) 96%, transparent);
+      }
+      .carousel-track {
+        display: flex;
+        gap: 16px;
+        padding: 16px;
+        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .card {
+        width: clamp(260px, 44vw, 340px);
+        flex: 0 0 auto;
+        display: grid;
+        gap: 12px;
+        background: color-mix(in oklab, var(--bg) 96%, transparent);
+      }
+      .card .media {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--muted);
+      }
+      .card h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .card p {
+        margin: 0;
+        color: #9ca3af;
+        font-size: 14px;
+      }
+      .card .links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .carousel-nav {
+        position: absolute;
+        inset: auto 8px 8px auto;
+        display: flex;
+        gap: 8px;
+      }
+      .round {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: color-mix(in oklab, var(--bg) 86%, transparent);
+        border: 1px solid var(--border);
+      }
+      .round:hover {
+        background: var(--muted);
+      }
+
+      /* Timeline + Gallery (Organisasi & Pengalaman) */
+      .timeline {
+        display: grid;
+        gap: 16px;
+      }
+      .timeline-item {
+        display: grid;
+        gap: 6px;
+        border-left: 3px solid var(--accent);
+        padding-left: 12px;
+      }
+      .timeline-item .role {
+        font-weight: 800;
+      }
+      .timeline-item .org {
+        color: #9ca3af;
+        font-size: 14px;
+      }
+      .gallery {
+        margin-top: 16px;
+      }
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: 700px) {
+        .grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .grid img {
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        cursor: zoom-in;
+        transition: transform 0.2s ease;
+      }
+      .grid img:hover {
+        transform: scale(1.02);
+      }
+
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.72);
+        z-index: 60;
+        padding: 24px;
+      }
+      .lightbox.open {
+        display: grid;
+      }
+      .lightbox img {
+        max-height: 88vh;
+        border-radius: 14px;
+      }
+
+      /* Reflection */
+      .reflection p {
+        margin: 0;
+      }
+
+      /* Contact */
+      .contact-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 820px) {
+        .contact-grid {
+          grid-template-columns: 1.2fr 0.8fr;
+        }
+      }
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+      .field input,
+      .field textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: color-mix(in oklab, var(--bg) 96%, transparent);
+        color: var(--text);
+      }
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      /* Footer */
+      footer {
+        padding: 32px 0;
+        color: #9ca3af;
+        font-size: 14px;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Animations: reveal on scroll */
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ------------- FUN STUFF ------------- */
+      :root {
+        --fun-z: 49;
+        --fun-z-fab: 60;
+        --spin-normal: 18s;
+        --spin-fast: 4s;
+        --fun-gap: 12px;
+        --fun-size: 28px;
+        --fun-accent: var(--accent);
+        --fun-text: var(--text);
+        --fun-bg: color-mix(in oklab, var(--bg) 92%, transparent);
+        --fun-border: var(--border);
+      }
+
+      /* Overlay utama (pointer-events none secara default agar tidak mengganggu klik)
+         Kecuali tombol/panda/ikon punya pointer-events: auto */
+      #fun-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: var(--fun-z);
+        pointer-events: none;
+      }
+
+      /* Gutter pinggir kiri/kanan tempat ikon-ikon “teknik” */
+      .fun-gutter {
+        position: absolute;
+        top: 72px; /* di bawah nav sticky */
+        bottom: 72px;
+        width: 56px;
+        display: grid;
+        align-content: space-between;
+        justify-items: center;
+        gap: var(--fun-gap);
+        padding: var(--fun-gap) 8px;
+        pointer-events: none;
+      }
+      .fun-left  { left:  0; }
+      .fun-right { right: 0; }
+
+      .fun-icon-wrap {
+        width: max(var(--fun-size), 24px);
+        height: max(var(--fun-size), 24px);
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: var(--fun-bg);
+        border: 1px solid var(--fun-border);
+        box-shadow: var(--shadow);
+        pointer-events: auto; /* boleh di-hover untuk animasi */
+      }
+
+      .fun-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--fun-text);
+        opacity: .9;
+        transform-origin: 50% 50%;
+        animation: fun-spin var(--spin-normal) linear infinite;
+      }
+      .fun-icon-wrap:hover .fun-icon {
+        animation-duration: var(--spin-fast);
+      }
+
+      @keyframes fun-spin { to { transform: rotate(360deg); } }
+
+      /* Tombol mengambang: Email */
+      .fun-fab {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: var(--fun-z-fab);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        background: var(--fun-accent);
+        color: #111;
+        border: 1px solid transparent;
+        box-shadow: var(--shadow);
+        font-weight: 800;
+        pointer-events: auto;
+      }
+      .fun-fab:focus-visible {
+        outline: 2px solid var(--fun-accent);
+        outline-offset: 2px;
+      }
+
+      /* Panel demo + tombol pembuka */
+      .fun-demo-toggle {
+        position: fixed;
+        left: 18px;
+        bottom: 18px;
+        z-index: var(--fun-z-fab);
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--fun-bg);
+        color: var(--fun-text);
+        border: 1px solid var(--fun-border);
+        box-shadow: var(--shadow);
+        font-weight: 700;
+      }
+      .fun-demo-panel {
+        position: fixed;
+        left: 18px;
+        bottom: 68px;
+        z-index: var(--fun-z-fab);
+        min-width: 240px;
+        padding: 12px;
+        border-radius: 12px;
+        background: var(--fun-bg);
+        border: 1px solid var(--fun-border);
+        box-shadow: var(--shadow);
+        display: none;
+        pointer-events: auto;
+      }
+      .fun-demo-panel.open { display: grid; gap: 8px; }
+      .fun-demo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--fun-border);
+        background: color-mix(in oklab, var(--bg) 96%, transparent);
+        color: var(--fun-text);
+      }
+
+      /* Panda berjalan menyusuri web */
+/* Panda fixed button */
+ .fun-panda {
+      position: fixed;
+      bottom: 24px;
+      left: -80px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--fun-bg);
+      border: 1px solid var(--fun-border);
+      box-shadow: var(--shadow);
+      z-index: var(--fun-z);
+      pointer-events: auto;
+      cursor: pointer;
+      animation: panda-walk 16s linear infinite alternate;
+  }
+
+  .fun-panda[data-dir="left"] {
+      animation-direction: alternate-reverse;
+  }
+
+  /* Ganti icon panda jadi img */
+  .fun-panda img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+  }
+
+  @keyframes panda-walk {
+      0%   { transform: translateX(-10vw) translateY(0); }
+      50%  { transform: translateX(60vw) translateY(-2vh); }
+      100% { transform: translateX(92vw) translateY(0); }
+  }
+
+  /* Sparkle ketika diklik */
+  .fun-sparkle {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, var(--fun-accent), transparent 60%),
+        radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--fun-accent) 70%, transparent), transparent 70%);
+      opacity: .85;
+      transform: translate(-50%, -50%) scale(.6);
+      pointer-events: none;
+      z-index: var(--fun-z-fab);
+      animation: sparkle-pop .9s ease-out forwards;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+  }
+
+  @keyframes sparkle-pop {
+      60% { transform: translate(-50%, -50%) scale(1.35) rotate(20deg); opacity: .9; }
+      100% { transform: translate(-50%, -50%) scale(.1) rotate(140deg); opacity: 0; }
+  }
+
+  /* Kurangi gerak jika prefer-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+      .fun-icon, .fun-panda { animation: none !important; }
+      .fun-sparkle { display: none !important; }
+  }
+
+      /* ------------- END FUN STUFF ------------- */
+    </style>
+  </head>
+  <body>
+    <div class="fun-panda">
+  <img src="img/pandas.png" alt="Panda">
+</div>
+    <header class="nav">
+      <div class="container nav-inner">
+        <div class="brand">
+          <div class="brand-badge" aria-hidden="true">NAURAHDF</div>
+        </div>
+        <nav class="nav-links" aria-label="Navigasi utama">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#resume">Resume/CV</a>
+          <a href="#projects">Projects</a>
+          <a href="#org-exp">Organization & Experience</a>
+          <a href="#reflections">Reflections</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <button
+            class="btn btn-ghost"
+            id="themeToggle"
+            aria-label="Toggle tema"
+            title="Toggle tema"
+          >
+            <span id="themeIcon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <h1 class="hero-title">
+              Halo, I'm
+              <span
+                style="
+                  background: var(--accent);
+                  color: #111;
+                  padding: 2px 8px;
+                  border-radius: 8px;
+                "
+                >Naurah</span
+              >
+            </h1>
+            <p class="muted">Informatics Engineering, Airlangga University</p>
+            <p class="hero-quote">
+              I'm a fifth-semester Informatics Engineering student with
+              interests in data analysis, design, and programming. I've
+              participated in various internal and external organizations and
+              competitions."
+            </p>
+            <div class="hero-actions">
+              <!-- 🔗 Lihat CV -->
+              <a
+                class="btn btn-primary"
+                id="ctaCV"
+                href="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=sharing"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg
+                  class="icon-20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    stroke="#111"
+                    stroke-width="1.5"
+                  />
+                  <path d="M14 2v6h6" stroke="#111" stroke-width="1.5" />
+                  <path d="M8 13h8M8 17h8" stroke="#111" stroke-width="1.5" />
+                </svg>
+                Lihat CV
+              </a>
+
+              <!-- 🔗 LinkedIn -->
+              <a
+                class="btn"
+                id="ctaLinkedIn"
+                href="https://www.linkedin.com/in/naurahdila/"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg
+                  class="icon-20"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4v15h-4zM8.5 8.5h3.8v2.1h.1c.5-1 1.7-2.1 3.6-2.1 3.8 0 4.5 2.5 4.5 5.7v9.3h-4v-8.2c0-2 0-4.6-2.8-4.6s-3.2 2.2-3.2 4.5v8.3h-4v-15z"
+                  />
+                </svg>
+                LinkedIn
+              </a>
+
+              <!-- 📧 Email -->
+              <a
+                class="btn"
+                id="ctaEmail"
+                href="mailto:nrhdilaf13@gmail.com"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg
+                  class="icon-20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="2"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M3 7l9 7 9-7"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                </svg>
+                Email
+              </a>
+
+              <!-- 💬 WhatsApp -->
+              <a
+                class="btn"
+                id="ctaWA"
+                href="https://wa.me/6282139521237"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg
+                  class="icon-20"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.62-6.003C.122 5.281 5.403 0 12.057 0c3.183 0 6.167 1.24 8.414 3.488a11.823 11.823 0 0 1 3.486 8.414c-.004 6.654-5.286 11.936-11.94 11.936a11.9 11.9 0 0 1-6.004-1.62L.057 24zm6.597-3.807c1.735.995 3.276 1.591 5.392 1.593 5.448.003 9.886-4.43 9.889-9.88.002-5.465-4.415-9.885-9.881-9.888-5.45 0-9.886 4.43-9.889 9.88-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.987zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.668.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.668-1.612-.916-2.205-.242-.58-.487-.5-.668-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413z"
+                  />
+                </svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+          <div class="">
+            <img
+              src="img/naurah.png"
+              alt="Foto HD Anda"
+              width="1000"
+              height="700"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">About</h2>
+            <span class="section-sub">Biography • Major • Skill • Goals</span>
+          </div>
+          <div class="about-wrap">
+            <article class="about-card reveal">
+              <h3 style="margin: 0 0 8px; font-weight: 800">
+                Biografi Singkat
+              </h3>
+              <p>
+                I'm Student
+                <strong>Airlangga University</strong> My Major
+                <strong>Informatics Engineering</strong>. Beyond academics, I
+                have actively participated in various internal and external
+                organizations, committees, and competitions, where I’ve honed my
+                leadership, teamwork, and communication skills. These
+                experiences have strengthened my ability to manage projects
+                effectively, collaborate with diverse teams, and deliver
+                innovative digital solutions.
+              </p>
+              <div class="chips">
+                <span class="chip">#UI/UX</span>
+                <span class="chip">#WebDev</span>
+                <span class="chip">#Komunitas</span>
+                <span class="chip">#Research</span>
+              </div>
+              <div style="margin-top: 14px; display: grid; gap: 6px">
+                <div>
+                  <strong>Skills</strong> Front-end, Design UI UX, Design Canva
+                  and Figma, Web Design & Program Design, Leadership, Teamwork
+                </div>
+                <div>
+                  <strong>Goals:</strong> innovative technology professional who
+                  can apply data analysis, programming, and design thinking to
+                  develop impactful digital solutions that improve people’s
+                  lives.
+                </div>
+                <div>
+                  <strong>introductory video</strong>
+                  <a
+                    id="introVideoLink"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-ghost"
+                    style="padding: 6px 10px"
+                    >watch the video</a
+                  >
+                </div>
+                <div>
+                  <strong>LinkedIn:</strong>
+                  <a
+                    id="aboutLinkedIn"
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-ghost"
+                    style="padding: 6px 10px"
+                    >visit profile</a
+                  >
+                </div>
+              </div>
+            </article>
+            <aside class="reveal">
+              <div class="about-photos">
+                <img
+                  data-ph="Kegiatan Kampus 1"
+                  data-ph-size="600x400"
+                  alt="Foto kegiatan kampus 1"
+                  src="./img/nrh.png"
+                />
+                <img
+                  data-ph="Kegiatan Kampus 2"
+                  data-ph-size="600x400"
+                  alt="Foto kegiatan kampus 2"
+                  src="./img/ekraf.png"
+                />
+                <img
+                  data-ph="Kolase 1"
+                  data-ph-size="600x400"
+                  alt="Kolase foto 1"
+                  src="./img/hima.png"
+                />
+                <img
+                  data-ph="Kolase 2"
+                  data-ph-size="600x400"
+                  alt="Kolase foto 2"
+                  src="./img/ukm.png"
+                />
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="resume">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Resume / CV</h2>
+          </div>
+
+          <div class="embed reveal">
+            <!-- 👇 Menampilkan CV dari Google Drive -->
+            <iframe
+              id="cvFrame"
+              title="CV Anda (PDF)"
+              referrerpolicy="no-referrer"
+              src="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link"
+              width="100%"
+              height="600"
+              style="border: none; border-radius: 8px"
+              allow="autoplay"
+            ></iframe>
+
+            <div
+              style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap"
+            >
+              <!-- 🔗 Tombol Buka CV -->
+              <a
+                class="btn btn-primary"
+                id="openCV"
+                href="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link"
+                target="_blank"
+                rel="noopener"
+              >
+                <svg class="icon-20" viewBox="0 0 24 24" fill="none">
+                  <path d="M14 3h7v7" stroke="#111" stroke-width="1.5" />
+                  <path d="M10 14L21 3" stroke="#111" stroke-width="1.5" />
+                  <path
+                    d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"
+                    stroke="#111"
+                    stroke-width="1.5"
+                  />
+                </svg>
+                OPEN CV
+              </a>
+
+              <!-- ⬇️ Tombol Unduh CV -->
+              <a
+                class="btn btn-ghost"
+                id="downloadCV"
+                href="https://drive.google.com/uc?export=download&id=1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40"
+                target="_blank"
+                rel="noopener"
+              >
+                Download CV
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Projects / Works</h2>
+            <span class="section-sub">work while at Airlangga University</span>
+          </div>
+
+          <div class="carousel reveal" aria-label="Daftar proyek">
+            <div class="carousel-track" id="carouselTrack">
+              <article class="card">
+                <div class="media">
+                  <img
+                    data-ph="Project Dashboard"
+                    data-ph-size="800x500"
+                    alt="Thumbnail Proyek 1"
+                    src="./img/nora.png"
+                  />
+                </div>
+                <div>
+                  <h3>Website for Selling Muslim Gamis & Fashion</h3>
+                  <p>
+                    A modern e-commerce website designed to sell premium gamis
+                    and Muslim fashion products. The platform provides an
+                    elegant interface, easy navigation, and secure transactions
+                    to enhance the shopping experience for users.
+                  </p>
+                </div>
+                <div class="links">
+                  <a
+                    class="btn btn-ghost"
+                    href="https://naurahdila.github.io/N.O.R.A/"
+                    target="_blank"
+                    rel="noopener"
+                    >Demo</a
+                  >
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="media">
+                  <img
+                    data-ph="Research Poster"
+                    data-ph-size="800x500"
+                    alt="Thumbnail Proyek 2"
+                    src="./img/bimbel.png"
+                  />
+                </div>
+                <div>
+                  <h3>Bimbelhub : your smart tutoring solution of choice</h3>
+                  <p>
+                    BimbelHub is a smart tutoring platform that helps students
+                    find the most suitable tutoring centers based on their
+                    needs, goals, and preferences. It offers an easy-to-use
+                    interface, reliable information, and personalized
+                    recommendations to support effective learning.
+                  </p>
+                </div>
+                <div class="links">
+                  <a
+                    class="btn btn-ghost"
+                    href="https://naurahdila.github.io/bimbelhub/"
+                    target="_blank"
+                    rel="noopener"
+                    >Demo</a
+                  >
+                </div>
+              </article>
+
+              <article class="card">
+                <div class="media">
+                  <img
+                    data-ph="Mobile App UI"
+                    data-ph-size="800x500"
+                    alt="Thumbnail Proyek 3"
+                    src="./img/figma.png"
+                  />
+                </div>
+                <div>
+                  <h3>FIGMA bimbelhub</h3>
+                  <p>
+                    A modern tutoring platform design created in Figma, focusing on intuitive navigation, clean UI, and seamless access to educational programs.
+                  </p>
+                </div>
+                <div class="links">
+                  <a
+                    class="btn btn-ghost"
+                    href="https://www.figma.com/design/nZiI2Jy05WaT8r6HBxaS7D/BimbelHub.?node-id=1-2&t=lW6zNKSMsKrCovav-1"
+                    target="_blank"
+                    rel="noopener"
+                    >Figma</a
+                  >
+                </div>
+              </article>
+            </div>
+            <div class="carousel-nav" aria-hidden="false">
+              <button class="round" id="prevSlide" aria-label="Sebelumnya">
+                <svg class="icon-20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M15 6l-6 6 6 6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button class="round" id="nextSlide" aria-label="Berikutnya">
+                <svg class="icon-20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 6l6 6-6 6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="org-exp">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Organization & Experiencen</h2>
+            <span class="section-sub"></span>
+          </div>
+          <div class="timeline reveal">
+            <div class="timeline-item">
+              <div class="role">Creative Designer</div>
+              <div class="org">Aulad Gemilang Indonesia • 2023 - Now</div>
+              <div class="muted">
+                - Designs and executes designs ranging from posters and brochures to social media content, and Develops consistent branding to strengthen the program's identity and expand promotional reach.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="role">Tutor</div>
+              <div class="org">Aulad Gemilang Indonesia • 2022 - Now</div>
+              <div class="muted">
+                Teach and guide students using interactive learning methods, provide
+regular evaluations, and create a positive and motivating learning
+environment.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="role">Head of Karang Taruna Sixde</div>
+              <div class="org">Sememi, Surabaya • 2025 - Now</div>
+              <div class="muted">
+                Leads youth organizations at the neighborhood/village level in designing,
+coordinating, and implementing social, cultural, and youth programs.
+              </div>
+            </div>
+             <div class="timeline-item">
+              <div class="role">Head of the Creative Economy Department</div>
+              <div class="org">Informatics Engineering Student Association • 2025 - Now</div>
+              <div class="muted">
+                Leads the planning and implementation of creative programs to support
+the organization's branding, promotion, and product marketing.
+              </div>
+          </div>
+
+            <div class="timeline-item">
+            <div class="role">Linesman Division, East Java Pomprov III</div>
+            <div class="org">East Java • Mei - Juni 2025</div>
+            <div class="muted">
+                The Linesman Division of East Java Pomprov III ensures fair play, manages match operations, and supports referees during competitions.
+              </div>
+          </div>
+
+            <div class="timeline-item">
+            <div class="role">Airlangga Badminton KSK Division Championship 2025</div>
+            <div class="org">Airlangga University • April - Juni 2025</div>
+            <div class="muted">
+                The Airlangga Badminton KSK Division organized and managed operations for the 2025 Championship.
+              </div>
+          </div>
+
+            <div class="timeline-item">
+            <div class="role">KOOR PDD Teknik Cup 2024</div>
+            <div class="org">Vocational Faculty • September - Desember 2024</div>
+            <div class="muted">
+                Coordinator of the PDD Division for Teknik Cup 2024, overseeing planning and event execution.
+              </div>
+          </div>
+
+            <div class="timeline-item">
+            <div class="role">PDD HIMTI Cares Vol 2</div>
+            <div class="org">Informatics Engineering • Mei - Juli 2024</div>
+            <div class="muted">
+               Member of the PDD Division for HIMTI Cares Vol. 2, Informatics Engineering, assisting in program planning and execution.
+              </div>
+          </div>
+
+            <div class="timeline-item">
+            <div class="role">KSK Inisialisasi 2024</div>
+            <div class="org">Informatics Engineering • Juni - Desember 2024</div>
+            <div class="muted">
+                Member of the KSK Inisialisasi 2024 team, Informatics Engineering, supporting event organization and coordination.
+              </div>
+          </div>
+
+
+          <div class="gallery reveal" aria-label="Galeri bukti foto">
+            <div class="grid" id="galleryGrid">
+              <img
+                data-ph="Foto Organisasi 1"
+                data-ph-size="600x400"
+                alt="Bukti foto 1"
+                src="./img/agi.jpg"
+              />
+              <img
+                data-ph="Foto Organisasi 2"
+                data-ph-size="600x400"
+                alt="Bukti foto 2"
+                src="./img/kartar.jpg"
+              />
+              <img
+                data-ph="Foto Organisasi 3"
+                data-ph-size="600x400"
+                alt="Bukti foto 3"
+                src="./img/ekraf2.jpg"
+              />
+              <img
+                data-ph="Foto Organisasi 4"
+                data-ph-size="600x400"
+                alt="Bukti foto 4"
+                src="./img/ekraf23.jpg"
+              />
+              <img
+                data-ph="Kegiatan Lapangan"
+                data-ph-size="600x400"
+                alt="Bukti foto 5"
+                src="./img/biz.jpg"
+              />
+              <img
+                data-ph="Rapat Tim"
+                data-ph-size="600x400"
+                alt="Bukti foto 6"
+                src="./img/pomprov.jpg"
+              />
+              <img
+                data-ph="Presentasi"
+                data-ph-size="600x400"
+                alt="Bukti foto 7"
+                src="./img/line.jpg"
+              />
+              <img
+                data-ph="Sertifikat"
+                data-ph-size="600x400"
+                alt="Bukti foto 8"
+                src="./img/kami.jpg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reflections">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Reflections</h2>
+            <span class="section-sub"
+              >Learning journey, challenges, and highlights</span
+            >
+          </div>
+          <article class="reflection reveal">
+            <p>
+              During my time at Universitas Airlangga, I have grown not only academically but also personally through various leadership and organizational experiences. Being actively involved in student organizations and events, such as managing divisions in sports and community programs, has taught me the importance of teamwork, communication, and responsibility. I have learned to balance rigorous coursework with extracurricular commitments, developing resilience, time management, and problem-solving skills. These experiences have shaped me into a more confident, adaptable, and proactive individual, ready to contribute positively to any professional or community setting in the future.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Contact</h2>
+            <span class="section-sub">Email • Sosial media • WhatsApp</span>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-card reveal">
+              <div class="contact-row" style="margin-bottom: 10px">
+                <a class="btn btn-primary" id="contactEmail" href="mailto:nrhdilaf13@gmail.com"
+                  >Kirim Email</a
+                >
+                <a
+                  class="btn"
+                  id="contactWA"
+                  href="https://wa.me/6282139521237?text=Halo%20saya%20tertarik%20untuk%20terhubung"
+                  target="_blank"
+                  rel="noopener"
+                  >Chat WhatsApp</a
+                >
+                <a
+                  class="btn"
+                  id="contactLinkedIn"
+                  href="https://www.linkedin.com/in/naurah-dila-8346a4378"
+                  target="_blank"
+                  rel="noopener"
+                  >LinkedIn</a
+                >
+                <a
+                  class="btn"
+                  id="contactCV"
+                  href="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener"
+                  >Lihat CV</a
+                >
+              </div>
+              <form id="contactForm">
+                <div class="field">
+                  <label for="name">Nama</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Nama Anda"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="message">Pesan</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tulis pesan singkat..."
+                    required
+                  ></textarea>
+                </div>
+                <div style="margin-top: 10px">
+                  <button class="btn btn-ghost" type="submit">
+                    Kirim via Email
+                  </button>
+                </div>
+              </form>
+            </div>
+            <aside class="reveal">
+              <div class="about-photos">
+                <img
+                  data-ph="Poster Kegiatan"
+                  data-ph-size="600x400"
+                  alt="Poster kegiatan"
+                  src="./img/agi2.jpg"
+                />
+                <img
+                  data-ph="Behind the Scenes"
+                  data-ph-size="600x400"
+                  alt="Di balik layar"
+                  src="./img/ti.jpg"
+                />
+                <img
+                  data-ph="Tim Inti"
+                  data-ph-size="600x400"
+                  alt="Foto tim inti"
+                  src="./img/tisl.jpg"
+                />
+                <img
+                  data-ph="Dokumentasi"
+                  data-ph-size="600x400"
+                  alt="Dokumentasi"
+                  src="./img/b.jpg"
+                />
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Pratinjau gambar"
+    >
+      <img id="lightboxImg" alt="Gambar pratinjau" />
+    </div>
+
+    <footer>
+      <div
+        class="container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+        "
+      >
+        <div>© <span id="year"></span> Naurah Dila Fitriah • Universitas Airlangga</div>
+      </div>
+    </footer>
+
+    <script>
+
+    const panda = document.querySelector('.fun-panda');
+  panda.addEventListener('click', (e) => {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'fun-sparkle';
+    sparkle.style.left = e.clientX + 'px';
+    sparkle.style.top = e.clientY + 'px';
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 900);
+  });
+      // -------------------------------
+      // KONFIGURASI LINK PRIBADI ANDA
+      // Ganti nilai berikut sesuai data Anda
+      const CONFIG = {
+        CV_URL:
+          "https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link",
+        LINKEDIN_URL: "https://www.linkedin.com/in/naurah-dila-8346a4378",
+        INTRO_VIDEO_URL: "https://youtu.be/FyCmEtf-vMg?si=xbMQDq34qFV-5548",
+        EMAIL: "mailto:nrhdilaf13@gmail.com",
+        WHATSAPP:
+          "https://wa.me/6282139521237?text=Halo%20saya%20tertarik%20untuk%20terhubung",
+      };
+      // -------------------------------
+
+      // Preferensi tema
+      const htmlEl = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+
+      function setThemeIcon() {
+        const isDark = htmlEl.getAttribute("data-theme") === "dark";
+        themeIcon.innerHTML = isDark
+          ? `<svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.5"/></svg>`
+          : `<svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5"/></svg>`;
+      }
+
+      function initTheme() {
+        const saved = localStorage.getItem("theme");
+        if (saved) {
+          htmlEl.setAttribute("data-theme", saved);
+        } else {
+          const prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          htmlEl.setAttribute("data-theme", prefersDark ? "dark" : "light");
+        }
+        setThemeIcon();
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const current = htmlEl.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        htmlEl.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        setThemeIcon();
+      });
+
+      // Tahun footer
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Set link CTA dan About
+      function wireLinks() {
+        const viewUrl = CONFIG.CV_URL;
+        const previewUrl = toDrivePreview(viewUrl);
+        const downloadUrl = toDriveDownload(viewUrl);
+
+        const setHref = (id, href) => {
+          const el = document.getElementById(id);
+          if (el && href) el.setAttribute("href", href);
+        };
+
+        setHref("ctaCV", viewUrl);
+        setHref("openCV", viewUrl);
+        setHref("downloadCV", downloadUrl);
+        setHref("contactCV", previewUrl);
+
+        ["ctaLinkedIn", "aboutLinkedIn", "contactLinkedIn"].forEach((id) =>
+          setHref(id, CONFIG.LINKEDIN_URL)
+        );
+        ["ctaEmail", "contactEmail"].forEach((id) =>
+          setHref(id, CONFIG.EMAIL)
+        );
+        ["ctaWA", "contactWA"].forEach((id) =>
+          setHref(id, CONFIG.WHATSAPP)
+        );
+
+        const intro = document.getElementById("introVideoLink");
+        if (intro) intro.setAttribute("href", CONFIG.INTRO_VIDEO_URL);
+      }
+
+      // Embed CV
+      function loadCV() {
+        const frame = document.getElementById("cvFrame");
+        if (!frame) return;
+        frame.src = toDrivePreview(CONFIG.CV_URL);
+      }
+
+      // Placeholder gambar berbasis SVG (data URI)
+      function svgPlaceholder(w, h, label) {
+        const bg =
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--bg")
+            .trim() || "#e5e7eb";
+        const accent =
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--accent")
+            .trim() || "#d1bbff";
+        const text =
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--text")
+            .trim() || "#0a0a0a";
+        const safeLabel = String(label || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+        const svg = `
+        <svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>
+          <defs>
+            <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
+              <stop offset='0%' stop-color='${accent}' stop-opacity='0.22'/>
+              <stop offset='100%' stop-color='${accent}' stop-opacity='0.05'/>
+            </linearGradient>
+          </defs>
+          <rect width='100%' height='100%' fill='${bg}'/>
+          <rect x='0' y='0' width='100%' height='100%' fill='url(#g)'/>
+          <g font-family='system-ui, -apple-system, Segoe UI, Roboto' fill='${text}' text-anchor='middle'>
+            <text x='50%' y='50%' font-size='18' opacity='.7'>${safeLabel}</text>
+          </g>
+        </svg>`;
+        return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+      }
+
+      function hydratePlaceholders(root = document) {
+        const imgs = root.querySelectorAll("img[data-ph]");
+        imgs.forEach((img) => {
+          const size = (img.getAttribute("data-ph-size") || "800x500").split("x");
+          const w = parseInt(size[0], 10) || 800;
+          const h = parseInt(size[1], 10) || 500;
+          const label = img.getAttribute("data-ph");
+          const hasSrc = img.getAttribute("src");
+          if (!hasSrc || img.dataset.forcePh === "true") {
+            img.src = svgPlaceholder(w, h, label);
+          }
+        });
+      }
+
+      // Fallback universal: bila gambar lokal gagal, tampilkan placeholder agar "muncul"
+      function ensureImageFallback() {
+        document.querySelectorAll("img").forEach((img) => {
+          img.addEventListener("error", () => {
+            const size = (img.getAttribute("data-ph-size") || "800x500").split("x");
+            const w = parseInt(size[0], 10) || img.naturalWidth || 800;
+            const h = parseInt(size[1], 10) || img.naturalHeight || 500;
+            const label = img.getAttribute("alt") || img.getAttribute("data-ph") || "Image";
+            img.src = svgPlaceholder(w, h, label);
+          });
+        });
+      }
+
+      // Carousel logic
+      const track = document.getElementById("carouselTrack");
+      let index = 0;
+      function updateCarousel() {
+        const cards = track.querySelectorAll(".card");
+        const card = cards[0];
+        if (!card) return;
+        const gap = 16;
+        const width = card.getBoundingClientRect().width + gap;
+        const maxIndex = Math.max(
+          0,
+          cards.length -
+            Math.floor(
+              track.parentElement.getBoundingClientRect().width / width
+            )
+        );
+        if (index < 0) index = 0;
+        if (index > maxIndex) index = maxIndex;
+        track.style.transform = `translateX(${-index * width}px)`;
+      }
+      document.getElementById("prevSlide").addEventListener("click", () => {
+        index--;
+        updateCarousel();
+      });
+      document.getElementById("nextSlide").addEventListener("click", () => {
+        index++;
+        updateCarousel();
+      });
+      window.addEventListener("resize", updateCarousel);
+
+      // Swipe support
+      (function enableSwipe() {
+        let startX = 0;
+        let isDown = false;
+        track.addEventListener("pointerdown", (e) => {
+          isDown = true;
+          startX = e.clientX;
+          track.setPointerCapture(e.pointerId);
+        });
+        track.addEventListener("pointerup", (e) => {
+          if (!isDown) return;
+          isDown = false;
+          const delta = e.clientX - startX;
+          if (Math.abs(delta) > 40) {
+            if (delta < 0) index++;
+            else index--;
+            updateCarousel();
+          }
+        });
+      })();
+
+      // Reveal on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // Lightbox
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      document.getElementById("galleryGrid").addEventListener("click", (e) => {
+        const img = e.target.closest("img");
+        if (!img) return;
+        lightboxImg.src = img.src;
+        lightbox.classList.add("open");
+      });
+      lightbox.addEventListener("click", () =>
+        lightbox.classList.remove("open")
+      );
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") lightbox.classList.remove("open");
+      });
+
+      // Form -> mailto
+      document.getElementById("contactForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value.trim();
+        const msg = document.getElementById("message").value.trim();
+        const subject = encodeURIComponent(
+          "Pesan dari " + (name || "Pengunjung Portofolio")
+        );
+        const body = encodeURIComponent(
+          msg + "\n\n— dikirim dari situs portofolio"
+        );
+        window.location.href =
+          CONFIG.EMAIL + `?subject=${subject}&body=${body}`;
+      });
+
+      // Init
+      initTheme();
+      hydratePlaceholders();
+      ensureImageFallback();
+      updateCarousel();
+      wireLinks();
+      loadCV();
+
+      // Re-hydrate placeholder saat tema ganti (agar gradien menyesuaikan)
+      const themeObserver = new MutationObserver(() => hydratePlaceholders());
+      themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme"],
+      });
+
+      // Fungsi bantu: Drive ID, preview, download
+      function getDriveId(url) {
+        const m = String(url || "").match(/\/d\/([a-zA-Z0-9_-]+)/);
+        return m ? m[1] : null;
+      }
+      function toDrivePreview(url) {
+        const id = getDriveId(url);
+        return id ? `https://drive.google.com/file/d/${id}/preview` : url;
+      }
+      function toDriveDownload(url) {
+        const id = getDriveId(url);
+        return id
+          ? `https://drive.google.com/uc?export=download&id=${id}`
+          : url;
+      }
+
+      // ------------- FUN STUFF SCRIPT -------------
+      (() => {
+        // Sisipkan style
+        const styleEl = document.createElement('style');
+        styleEl.setAttribute('id', 'fun-styles');
+        styleEl.textContent = CSS; // CSS sudah didefinisikan di atas
+        document.head.appendChild(styleEl);
+
+        // Buat overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'fun-overlay';
+
+        // Gutter kiri/kanan
+        const left = document.createElement('div');
+        const right = document.createElement('div');
+        left.className = 'fun-gutter fun-left';
+        right.className = 'fun-gutter fun-right';
+        overlay.appendChild(left);
+        overlay.appendChild(right);
+
+        // Util: buat ikon SVG sederhana (gear, atom, chip)
+        const svgNS = 'http://www.w3.org/2000/svg';
+        function makeIcon(pathD, viewBox='0 0 24 24') {
+          const wrap = document.createElement('div');
+          wrap.className = 'fun-icon-wrap';
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.setAttribute('class', 'fun-icon');
+          svg.setAttribute('viewBox', viewBox);
+          svg.setAttribute('fill', 'none');
+          const path = document.createElementNS(svgNS, 'path');
+          path.setAttribute('d', pathD);
+          path.setAttribute('stroke', 'currentColor');
+          path.setAttribute('stroke-width', '1.6');
+          path.setAttribute('stroke-linecap', 'round');
+          path.setAttribute('stroke-linejoin', 'round');
+          svg.appendChild(path);
+          wrap.appendChild(svg);
+          return wrap;
+        }
+
+        // Beberapa ikon “teknik”
+        const ICONS = [
+          // gear
+          'M12 8a4 4 0 1 0 0 8a4 4 0 0 0 0-8Zm9 4l-2 1l.4 2.3l-2.3.4l-1 2l-2-1l-2 1l-1-2l-2.3-.4L5 13l-2-1l2-1l-.4-2.3l2.3-.4l1-2l2 1l2-1l1 2l2.3.4L19 11l2 1z',
+          // atom
+          'M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M2 12c0-5.5 4.5-10 10-10s10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12z',
+          // chip
+          'M7 7h10v10H7z M12 2v3m0 14v3M2 12h3m14 0h3 M5 5l2 2m10 10l2 2M19 5l-2 2M5 19l2-2',
+          // bolt
+          'M13 2L6 14h5l-2 8L18 10h-5z',
+          // bracket {}
+          'M9 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2v0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2 M15 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2v0a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2'
+        ];
+
+        function seedGutter(colEl, count=5) {
+          for (let i=0; i<count; i++) {
+            const ico = makeIcon(ICONS[i % ICONS.length]);
+            colEl.appendChild(ico);
+          }
+        }
+        seedGutter(left, 5);
+        seedGutter(right, 5);
+
+        // Panda berjalan
+        const pandaBtn = document.createElement('button');
+        pandaBtn.className = 'fun-panda';
+        pandaBtn.setAttribute('type', 'button');
+        pandaBtn.setAttribute('aria-label', 'Panda berjalan – klik untuk ubah arah');
+        pandaBtn.setAttribute('title', 'Klik untuk ubah arah • Tekan spasi untuk lompat');
+
+        // SVG kepala panda mini (ringan)
+        pandaBtn.innerHTML = `
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="34" r="18" fill="currentColor" opacity=".95"></circle>
+            <circle cx="22" cy="20" r="8" fill="currentColor"></circle>
+            <circle cx="42" cy="20" r="8" fill="currentColor"></circle>
+            <circle cx="26" cy="34" r="4" fill="#fff"></circle>
+            <circle cx="38" cy="34" r="4" fill="#fff"></circle>
+            <circle cx="26" cy="34" r="2" fill="#111"></circle>
+            <circle cx="38" cy="34" r="2" fill="#111"></circle>
+            <ellipse cx="32" cy="42" rx="5" ry="3" fill="#111"></ellipse>
+          </svg>
+        `;
+
+        let dir = 'right';
+        function toggleDirection() {
+          dir = (dir === 'right') ? 'left' : 'right';
+          pandaBtn.setAttribute('data-dir', dir === 'left' ? 'left' : 'right');
+        }
+        pandaBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleDirection();
+          // efek “lompat kecil”
+          pandaBtn.animate(
+            [{ transform: getComputedStyle(pandaBtn).transform + ' translateY(0)' },
+             { transform: getComputedStyle(pandaBtn).transform + ' translateY(-12px)' },
+             { transform: getComputedStyle(pandaBtn).transform + ' translateY(0)' }],
+            { duration: 420, easing: 'ease-out' }
+          );
+        });
+        pandaBtn.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            pandaBtn.click();
+          }
+        });
+
+        // FAB Email (mailto langsung)
+        const fabEmail = document.createElement('a');
+        fabEmail.className = 'fun-fab';
+        fabEmail.href = 'mailto:nrhdilaf13@gmail.com?subject=' + encodeURIComponent('Halo Naurah — dari situs portofolio') + '&body=' + encodeURIComponent('Hai Naurah,%0D%0A%0D%0ASaya ingin terhubung...');
+        fabEmail.setAttribute('aria-label', 'Kirim Email ke Naurah');
+        fabEmail.innerHTML = `
+          <svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" stroke="#111" stroke-width="1.5"/>
+            <path d="M3 7l9 7 9-7" stroke="#111" stroke-width="1.5"/>
+          </svg>
+          <span>Email</span>
+        `;
+
+        // Panel Demo
+        const demoBtn = document.createElement('button');
+        demoBtn.className = 'fun-demo-toggle';
+        demoBtn.type = 'button';
+        demoBtn.setAttribute('aria-expanded', 'false');
+        demoBtn.innerHTML = `
+          <svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          Demo
+        `;
+        const demoPanel = document.createElement('div');
+        demoPanel.className = 'fun-demo-panel';
+        demoPanel.setAttribute('role', 'menu');
+        demoPanel.innerHTML = `
+          <a class="fun-demo-link" role="menuitem" target="_blank" rel="noopener" href="https://naurahdila.github.io/N.O.R.A/">
+            <svg class="icon-16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M14 3h7v7M10 14L21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            N.O.R.A (Live)
+          </a>
+          <a class="fun-demo-link" role="menuitem" target="_blank" rel="noopener" href="https://naurahdila.github.io/bimbelhub/">
+            <svg class="icon-16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M14 3h7v7M10 14L21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            BimbelHub (Live)
+          </a>
+          <a class="fun-demo-link" role="menuitem" target="_blank" rel="noopener" href="https://www.figma.com/design/nZiI2Jy05WaT8r6HBxaS7D/BimbelHub.?node-id=1-2&t=lW6zNKSMsKrCovav-1">
+            <svg class="icon-16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2v20M5 7h14M5 17h14" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            Figma BimbelHub
+          </a>
+        `;
+        demoBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const open = demoPanel.classList.toggle('open');
+          demoBtn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', () => {
+          if (demoPanel.classList.contains('open')) {
+            demoPanel.classList.remove('open');
+            demoBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Tambah ke DOM
+        document.body.appendChild(overlay);
+        overlay.appendChild(pandaBtn);
+        document.body.appendChild(fabEmail);
+        document.body.appendChild(demoBtn);
+        document.body.appendChild(demoPanel);
+
+        // Animasi klik universal (sparkle)
+        document.addEventListener('click', (e) => {
+          // Abaikan jika reduced motion
+          const rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (rm) return;
+
+          const s = document.createElement('span');
+          s.className = 'fun-sparkle';
+          s.style.left = e.clientX + 'px';
+          s.style.top = e.clientY + 'px';
+          document.body.appendChild(s);
+          setTimeout(() => s.remove(), 900);
+        }, { capture: true });
+
+      })();
+      // ------------- END FUN STUFF -------------
+    </script>
+  </body>
+</html>
