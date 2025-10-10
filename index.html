@@ -18,6 +18,12 @@
         --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         --radius: 14px;
         --chip-bg: #f4f4f5;
+        /* tombol: efek shadow ungu (aksen utama) */
+        --purple-500: #a78bfa;
+        /* CHANGE: Tambah CSS: purple glow untuk tombol/ikon + grid skills + perbaikan carousel */
+        --accent-purple: #a855f7;            /* ungu utama */
+        --accent-purple-20: rgba(168,85,247,.25);
+        --accent-purple-10: rgba(168,85,247,.12);
       }
       html[data-theme="dark"] {
         --bg: #0b0b0b; /* black */
@@ -160,10 +166,80 @@
         height: 20px;
       }
 
-      /* Sections */
-      section {
-        padding: 64px 0;
+      /* tombol: efek shadow ungu (aksen utama) */
+      .btn, .btn-ghost, .round, .skill {
+        transition: box-shadow .2s ease, transform .2s ease, background-color .2s ease;
       }
+      .btn:hover, .btn:focus-visible,
+      .btn-ghost:hover, .btn-ghost:focus-visible,
+      .round:hover, .round:focus-visible,
+      .skill:hover, .skill:focus-visible {
+        box-shadow:
+          0 10px 24px -10px rgba(167,139,250,.45),
+          0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      /* CHANGE: Tambah CSS: purple glow untuk tombol/ikon + grid skills + perbaikan carousel */
+      .btn,
+      .round,
+      .skill {
+        transition: transform .2s ease, box-shadow .2s ease, outline-color .2s ease;
+      }
+      .btn:hover,
+      .btn:focus-visible,
+      .round:hover,
+      .round:focus-visible,
+      .skill:hover,
+      .skill:focus-visible {
+        box-shadow:
+          0 0 0 4px var(--accent-purple-20),
+          0 10px 28px var(--accent-purple-10);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      /* Grid Skills: ikon kecil dan rapat */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 12px;
+        align-items: center;
+      }
+      .skill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(125,125,125,.18);
+        background: rgba(120,120,120,.06);
+        color: inherit;
+        text-decoration: none;
+      }
+      .skill .icon {
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+      }
+      .skill .label {
+        font-size: .9rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      /* Carousel track: sentuhan lebih halus saat drag */
+      .carousel-track {
+        touch-action: pan-y; /* tetap bisa scroll vertikal saat geser horizontal */
+        cursor: grab;
+      }
+      .carousel-track:active {
+        cursor: grabbing;
+      }
+
+      /* Sections */
+      section { padding: clamp(40px, 6vw, 64px) 0; }
       .section-head {
         margin-bottom: 20px;
         display: flex;
@@ -266,11 +342,14 @@
         gap: 12px;
         grid-template-columns: 1fr 1fr;
       }
+      @media (max-width: 420px) {
+        .about-photos { grid-template-columns: 1fr; }
+      }
 
       /* Embed PDF */
       .embed iframe {
         width: 100%;
-        min-height: 520px;
+        min-height: clamp(360px, 60vh, 520px);
         border: none;
         border-radius: 12px;
         background: var(--muted);
@@ -288,13 +367,17 @@
         border-radius: var(--radius);
         border: 1px solid var(--border);
         background: color-mix(in oklab, var(--bg) 96%, transparent);
+        /* agar horizontal drag nyaman di touch */
+        touch-action: pan-y;
       }
       .carousel-track {
         display: flex;
         gap: 16px;
         padding: 16px;
         transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        cursor: grab;
       }
+      .carousel-track:active { cursor: grabbing; }
       .card {
         width: clamp(260px, 44vw, 340px);
         flex: 0 0 auto;
@@ -372,6 +455,9 @@
         .grid {
           grid-template-columns: repeat(4, 1fr);
         }
+      }
+      @media (max-width: 420px) {
+        .grid { grid-template-columns: 1fr; }
       }
       .grid img {
         border-radius: 10px;
@@ -533,7 +619,7 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 12px 14px;
+        padding: 10px 12px; /* dikurangi padding-nya agar tidak terlalu besar di layar kecil */
         border-radius: 999px;
         background: var(--fun-accent);
         color: #111;
@@ -657,6 +743,66 @@
   }
 
       /* ------------- END FUN STUFF ------------- */
+
+      /* CHANGE: Tambahkan CSS khusus navbar mobile (hamburger) */
+    </style>
+    <style>
+      /* Default: sembunyikan tombol hamburger di layar besar */
+      .nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: var(--muted);
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+      .nav-toggle svg { width: 20px; height: 20px; }
+
+      /* Scrim latar saat menu terbuka */
+      .nav-scrim {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.45);
+        z-index: 48; /* di bawah nav (50) dan di atas konten */
+        display: none;
+      }
+      .nav-scrim.show { display: block; }
+
+      /* Nonaktifkan scroll saat menu mobile terbuka */
+      body.nav-open { overflow: hidden; }
+
+      /* Breakpoint untuk mobile/tablet kecil */
+      /* CHANGE: Perluas breakpoint ke iPad: dari 768px -> 1024px */
+      @media (max-width: 1024px) {
+        /* CHANGE: Sesuaikan tinggi navbar mobile/tablet */
+        .nav { --nav-h: 60px; }
+        .nav-inner { min-height: var(--nav-h,60px); }
+        /* Tampilkan hamburger, sembunyikan nav desktop */
+        .nav-toggle { display: inline-flex; }
+        /* Nav links menjadi panel overlay di bawah header */
+        .nav-links {
+          position: fixed !important;
+          top: var(--nav-h,60px) !important;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          display: none !important;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 6px;
+          padding: 12px 16px 16px;
+          background: color-mix(in oklab, var(--bg) 96%, transparent);
+          border-bottom: 1px solid var(--border);
+        }
+        .nav-links a {
+          padding: 10px 12px;
+          border-radius: 10px;
+        }
+        .nav-links.open { display: flex !important; }
+      }
     </style>
   </head>
   <body>
@@ -668,10 +814,24 @@
         <div class="brand">
           <div class="brand-badge" aria-hidden="true">NAURAHDF</div>
         </div>
-        <nav class="nav-links" aria-label="Navigasi utama">
+        <!-- CHANGE: Tombol hamburger untuk mobile -->
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Buka menu"
+          aria-controls="navLinks"
+          aria-expanded="false"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+         <!-- CHANGE: Tambah id pada nav agar bisa ditoggle -->
+        <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#resume">Resume/CV</a>
+          <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
           <a href="#org-exp">Organization & Experience</a>
           <a href="#reflections">Reflections</a>
@@ -689,6 +849,9 @@
         </div>
       </div>
     </header>
+
+    <!-- CHANGE: Scrim untuk menutup menu saat area gelap diklik -->
+    <div class="nav-scrim" id="navScrim"></div>
 
     <main>
       <section id="home" class="hero">
@@ -711,7 +874,10 @@
               I'm a fifth-semester Informatics Engineering student with
               interests in data analysis, design, and programming. I've
               participated in various internal and external organizations and
-              competitions."
+              competitions, where I’ve honed my leadership, teamwork, and
+              communication skills. These experiences have strengthened my
+              ability to manage projects effectively, collaborate with diverse
+              teams, and deliver innovative digital solutions.
             </p>
             <div class="hero-actions">
               <!-- 🔗 Lihat CV -->
@@ -979,6 +1145,60 @@
         </div>
       </section>
 
+      <!-- Tambah Section Skills (sebelum Projects) -->
+      <section id="skills">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Skills</h2>
+            <span class="section-sub">Tools, Languages & Frameworks</span>
+          </div>
+
+          <div class="skills-grid reveal" aria-label="Skill icons">
+             <!-- CHANGE: Tambah ikon kecil + tautan resmi -->
+            <a class="skill" href="https://www.canva.com/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/canva" alt="Canva" />
+              <span class="label">Canva</span>
+            </a>
+            <a class="skill" href="https://www.figma.com/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/figma" alt="Figma" />
+              <span class="label">Figma</span>
+            </a>
+            <a class="skill" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/html5" alt="HTML5" />
+              <span class="label">HTML</span>
+            </a>
+            <a class="skill" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/css3" alt="CSS3" />
+              <span class="label">CSS</span>
+            </a>
+            <a class="skill" href="https://laravel.com/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/laravel" alt="Laravel" />
+              <span class="label">Laravel</span>
+            </a>
+            <a class="skill" href="https://www.python.org/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/python" alt="Python" />
+              <span class="label">Python</span>
+            </a>
+            <a class="skill" href="https://flutter.dev/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/flutter" alt="Flutter" />
+              <span class="label">Flutter</span>
+            </a>
+            <a class="skill" href="https://go.dev/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/go" alt="Go" />
+              <span class="label">Go</span>
+            </a>
+            <a class="skill" href="https://www.mysql.com/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/mysql" alt="MySQL" />
+              <span class="label">MySQL</span>
+            </a>
+            <a class="skill" href="https://www.postgresql.org/" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL" />
+              <span class="label">PostgreSQL</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section id="projects">
         <div class="container">
           <div class="section-head">
@@ -1126,7 +1346,7 @@ environment.
               <div class="role">Head of Karang Taruna Sixde</div>
               <div class="org">Sememi, Surabaya • 2025 - Now</div>
               <div class="muted">
-                Leads youth organizations at the neighborhood/village level in designing,
+                Leads the youth organizations at the neighborhood/village level in designing,
 coordinating, and implementing social, cultural, and youth programs.
               </div>
             </div>
@@ -1137,99 +1357,93 @@ coordinating, and implementing social, cultural, and youth programs.
                 Leads the planning and implementation of creative programs to support
 the organization's branding, promotion, and product marketing.
               </div>
-          </div>
-
+            </div>
             <div class="timeline-item">
-            <div class="role">Linesman Division, East Java Pomprov III</div>
-            <div class="org">East Java • Mei - Juni 2025</div>
-            <div class="muted">
+              <div class="role">Linesman Division, East Java Pomprov III</div>
+              <div class="org">East Java • Mei - Juni 2025</div>
+              <div class="muted">
                 The Linesman Division of East Java Pomprov III ensures fair play, manages match operations, and supports referees during competitions.
               </div>
-          </div>
-
+            </div>
             <div class="timeline-item">
-            <div class="role">Airlangga Badminton KSK Division Championship 2025</div>
-            <div class="org">Airlangga University • April - Juni 2025</div>
-            <div class="muted">
+              <div class="role">Airlangga Badminton KSK Division Championship 2025</div>
+              <div class="org">Airlangga University • April - Juni 2025</div>
+              <div class="muted">
                 The Airlangga Badminton KSK Division organized and managed operations for the 2025 Championship.
               </div>
-          </div>
-
+            </div>
             <div class="timeline-item">
-            <div class="role">KOOR PDD Teknik Cup 2024</div>
-            <div class="org">Vocational Faculty • September - Desember 2024</div>
-            <div class="muted">
+              <div class="role">KOOR PDD Teknik Cup 2024</div>
+              <div class="org">Vocational Faculty • September - Desember 2024</div>
+              <div class="muted">
                 Coordinator of the PDD Division for Teknik Cup 2024, overseeing planning and event execution.
               </div>
-          </div>
-
+            </div>
             <div class="timeline-item">
-            <div class="role">PDD HIMTI Cares Vol 2</div>
-            <div class="org">Informatics Engineering • Mei - Juli 2024</div>
-            <div class="muted">
+              <div class="role">PDD HIMTI Cares Vol 2</div>
+              <div class="org">Informatics Engineering • Mei - Juli 2024</div>
+              <div class="muted">
                Member of the PDD Division for HIMTI Cares Vol. 2, Informatics Engineering, assisting in program planning and execution.
               </div>
-          </div>
-
+            </div>
             <div class="timeline-item">
-            <div class="role">KSK Inisialisasi 2024</div>
-            <div class="org">Informatics Engineering • Juni - Desember 2024</div>
-            <div class="muted">
+              <div class="role">KSK Inisialisasi 2024</div>
+              <div class="org">Informatics Engineering • Juni - Desember 2024</div>
+              <div class="muted">
                 Member of the KSK Inisialisasi 2024 team, Informatics Engineering, supporting event organization and coordination.
               </div>
-          </div>
-
-
-          <div class="gallery reveal" aria-label="Galeri bukti foto">
-            <div class="grid" id="galleryGrid">
-              <img
-                data-ph="Foto Organisasi 1"
-                data-ph-size="600x400"
-                alt="Bukti foto 1"
-                src="./img/agi.jpg"
-              />
-              <img
-                data-ph="Foto Organisasi 2"
-                data-ph-size="600x400"
-                alt="Bukti foto 2"
-                src="./img/kartar.jpg"
-              />
-              <img
-                data-ph="Foto Organisasi 3"
-                data-ph-size="600x400"
-                alt="Bukti foto 3"
-                src="./img/ekraf2.jpg"
-              />
-              <img
-                data-ph="Foto Organisasi 4"
-                data-ph-size="600x400"
-                alt="Bukti foto 4"
-                src="./img/ekraf23.jpg"
-              />
-              <img
-                data-ph="Kegiatan Lapangan"
-                data-ph-size="600x400"
-                alt="Bukti foto 5"
-                src="./img/biz.jpg"
-              />
-              <img
-                data-ph="Rapat Tim"
-                data-ph-size="600x400"
-                alt="Bukti foto 6"
-                src="./img/pomprov.jpg"
-              />
-              <img
-                data-ph="Presentasi"
-                data-ph-size="600x400"
-                alt="Bukti foto 7"
-                src="./img/line.jpg"
-              />
-              <img
-                data-ph="Sertifikat"
-                data-ph-size="600x400"
-                alt="Bukti foto 8"
-                src="./img/kami.jpg"
-              />
+            </div>
+            <div class="gallery reveal" aria-label="Galeri bukti foto">
+              <div class="grid" id="galleryGrid">
+                <img
+                  data-ph="Foto Organisasi 1"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 1"
+                  src="./img/agi.jpg"
+                />
+                <img
+                  data-ph="Foto Organisasi 2"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 2"
+                  src="./img/kartar.jpg"
+                />
+                <img
+                  data-ph="Foto Organisasi 3"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 3"
+                  src="./img/ekraf2.jpg"
+                />
+                <img
+                  data-ph="Foto Organisasi 4"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 4"
+                  src="./img/ekraf23.jpg"
+                />
+                <img
+                  data-ph="Kegiatan Lapangan"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 5"
+                  src="./img/biz.jpg"
+                />
+                <img
+                  data-ph="Rapat Tim"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 6"
+                  src="./img/pomprov.jpg"
+                />
+                <img
+                  data-ph="Presentasi"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 7"
+                  src="./img/line.jpg"
+                />
+                <img
+                  data-ph="Sertifikat"
+                  data-ph-size="600x400"
+                  alt="Bukti foto 8"
+                  src="./img/kami.jpg"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -1389,7 +1603,7 @@ the organization's branding, promotion, and product marketing.
       const CONFIG = {
         CV_URL:
           "https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link",
-        LINKEDIN_URL: "https://www.linkedin.com/in/naurah-dila-8346a4378",
+        LINKEDIN_URL: "https://www.linkedin.com/in/naurahdila/",
         INTRO_VIDEO_URL: "https://youtu.be/FyCmEtf-vMg?si=xbMQDq34qFV-5548",
         EMAIL: "mailto:nrhdilaf13@gmail.com",
         WHATSAPP:
@@ -1666,7 +1880,203 @@ the organization's branding, promotion, and product marketing.
         // Sisipkan style
         const styleEl = document.createElement('style');
         styleEl.setAttribute('id', 'fun-styles');
-        styleEl.textContent = CSS; // CSS sudah didefinisikan di atas
+        styleEl.textContent = `
+      :root {
+        --fun-z: 49;
+        --fun-z-fab: 60;
+        --spin-normal: 18s;
+        --spin-fast: 4s;
+        --fun-gap: 12px;
+        --fun-size: 28px;
+        --fun-accent: var(--accent);
+        --fun-text: var(--text);
+        --fun-bg: color-mix(in oklab, var(--bg) 92%, transparent);
+        --fun-border: var(--border);
+      }
+
+      /* Overlay utama (pointer-events none secara default agar tidak mengganggu klik)
+         Kecuali tombol/panda/ikon punya pointer-events: auto */
+      #fun-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: var(--fun-z);
+        pointer-events: none;
+      }
+
+      /* Gutter pinggir kiri/kanan tempat ikon-ikon “teknik” */
+      .fun-gutter {
+        position: absolute;
+        top: 72px; /* di bawah nav sticky */
+        bottom: 72px;
+        width: 56px;
+        display: grid;
+        align-content: space-between;
+        justify-items: center;
+        gap: var(--fun-gap);
+        padding: var(--fun-gap) 8px;
+        pointer-events: none;
+      }
+      .fun-left  { left:  0; }
+      .fun-right { right: 0; }
+
+      .fun-icon-wrap {
+        width: max(var(--fun-size), 24px);
+        height: max(var(--fun-size), 24px);
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: var(--fun-bg);
+        border: 1px solid var(--fun-border);
+        box-shadow: var(--shadow);
+        pointer-events: auto; /* boleh di-hover untuk animasi */
+      }
+
+      .fun-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--fun-text);
+        opacity: .9;
+        transform-origin: 50% 50%;
+        animation: fun-spin var(--spin-normal) linear infinite;
+      }
+      .fun-icon-wrap:hover .fun-icon {
+        animation-duration: var(--spin-fast);
+      }
+
+      @keyframes fun-spin { to { transform: rotate(360deg); } }
+
+      /* Tombol mengambang: Email */
+      .fun-fab {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: var(--fun-z-fab);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px; /* dikurangi padding-nya agar tidak terlalu besar di layar kecil */
+        border-radius: 999px;
+        background: var(--fun-accent);
+        color: #111;
+        border: 1px solid transparent;
+        box-shadow: var(--shadow);
+        font-weight: 800;
+        pointer-events: auto;
+      }
+      .fun-fab:focus-visible {
+        outline: 2px solid var(--fun-accent);
+        outline-offset: 2px;
+      }
+
+      /* Panel demo + tombol pembuka */
+      .fun-demo-toggle {
+        position: fixed;
+        left: 18px;
+        bottom: 18px;
+        z-index: var(--fun-z-fab);
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--fun-bg);
+        color: var(--fun-text);
+        border: 1px solid var(--fun-border);
+        box-shadow: var(--shadow);
+        font-weight: 700;
+      }
+      .fun-demo-panel {
+        position: fixed;
+        left: 18px;
+        bottom: 68px;
+        z-index: var(--fun-z-fab);
+        min-width: 240px;
+        padding: 12px;
+        border-radius: 12px;
+        background: var(--fun-bg);
+        border: 1px solid var(--fun-border);
+        box-shadow: var(--shadow);
+        display: none;
+        pointer-events: auto;
+      }
+      .fun-demo-panel.open { display: grid; gap: 8px; }
+      .fun-demo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--fun-border);
+        background: color-mix(in oklab, var(--bg) 96%, transparent);
+        color: var(--fun-text);
+      }
+
+      /* Panda berjalan menyusuri web */
+/* Panda fixed button */
+ .fun-panda {
+      position: fixed;
+      bottom: 24px;
+      left: -80px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--fun-bg);
+      border: 1px solid var(--fun-border);
+      box-shadow: var(--shadow);
+      z-index: var(--fun-z);
+      pointer-events: auto;
+      cursor: pointer;
+      animation: panda-walk 16s linear infinite alternate;
+  }
+
+  .fun-panda[data-dir="left"] {
+      animation-direction: alternate-reverse;
+  }
+
+  /* Ganti icon panda jadi img */
+  .fun-panda img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+  }
+
+  @keyframes panda-walk {
+      0%   { transform: translateX(-10vw) translateY(0); }
+      50%  { transform: translateX(60vw) translateY(-2vh); }
+      100% { transform: translateX(92vw) translateY(0); }
+  }
+
+  /* Sparkle ketika diklik */
+  .fun-sparkle {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, var(--fun-accent), transparent 60%),
+        radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--fun-accent) 70%, transparent), transparent 70%);
+      opacity: .85;
+      transform: translate(-50%, -50%) scale(.6);
+      pointer-events: none;
+      z-index: var(--fun-z-fab);
+      animation: sparkle-pop .9s ease-out forwards;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+  }
+
+  @keyframes sparkle-pop {
+      60% { transform: translate(-50%, -50%) scale(1.35) rotate(20deg); opacity: .9; }
+      100% { transform: translate(-50%, -50%) scale(.1) rotate(140deg); opacity: 0; }
+  }
+
+  /* Kurangi gerak jika prefer-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+      .fun-icon, .fun-panda { animation: none !important; }
+      .fun-sparkle { display: none !important; }
+  }
+        `;
         document.head.appendChild(styleEl);
 
         // Buat overlay
@@ -1829,6 +2239,8 @@ the organization's branding, promotion, and product marketing.
 
         // Tambah ke DOM
         document.body.appendChild(overlay);
+        overlay.appendChild(left);
+        overlay.appendChild(right);
         overlay.appendChild(pandaBtn);
         document.body.appendChild(fabEmail);
         document.body.appendChild(demoBtn);
@@ -1850,6 +2262,137 @@ the organization's branding, promotion, and product marketing.
 
       })();
       // ------------- END FUN STUFF -------------
+
+      // CHANGE: Toggle navbar mobile (hamburger)
+      (function mobileNav() {
+        const navToggle = document.getElementById('navToggle');
+        const navLinks  = document.getElementById('navLinks');
+        const scrim     = document.getElementById('navScrim');
+
+        /* CHANGE: Samakan breakpoint JS dengan CSS: 1024px */
+        const mq        = window.matchMedia('(max-width: 1024px)');
+
+        function closeNav() {
+          if (!navLinks) return; // Tambahan guard clause
+          navLinks.classList.remove('open');
+          document.body.classList.remove('nav-open');
+          navToggle?.setAttribute('aria-expanded', 'false');
+          scrim?.classList.remove('show');
+        }
+        function openNav() {
+          if (!navLinks) return; // Tambahan guard clause
+          navLinks.classList.add('open');
+          document.body.classList.add('nav-open');
+          navToggle?.setAttribute('aria-expanded', 'true');
+          scrim?.classList.add('show');
+        }
+        function toggleNav() {
+          const willOpen = !navLinks.classList.contains('open');
+          willOpen ? openNav() : closeNav();
+        }
+
+        navToggle?.addEventListener('click', (e) => {
+          e.stopPropagation(); // Mencegah event bubble ke scrim
+          toggleNav();
+        });
+        scrim?.addEventListener('click', closeNav);
+
+        // Tutup saat klik salah satu link
+        navLinks?.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', closeNav);
+        });
+
+        // Tutup saat tekan ESC
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeNav();
+        });
+
+        /* CHANGE: Tutup menu ketika melebar ke desktop (>1024px) */
+        mq.addEventListener?.('change', (e) => { if (!e.matches) closeNav(); });
+        window.addEventListener('resize', () => { if (!mq.matches) closeNav(); });
+      })();
+
+      // CHANGE: Tambah skrip carousel: drag + tombol, aman terhadap listener ganda
+      (function () {
+        const byId = (id) => document.getElementById(id);
+        const prev = byId('prevSlide');
+        const next = byId('nextSlide');
+        let track = byId('carouselTrack');
+        if (!track || !prev || !next) return;
+
+        // Hilangkan listener lama (jika ada blok skrip lain) dengan replace node
+        try {
+          const clone = track.cloneNode(true);
+          track.parentNode.replaceChild(clone, track);
+          track = clone;
+        } catch {}
+
+        const gap = 16; // sesuai CSS .carousel-track gap
+        const cardEl = track.querySelector('.card');
+        if (!cardEl) return;
+
+        const cardWidth = () => cardEl.getBoundingClientRect().width + gap;
+        const maxIndex = () => Math.max(0, track.children.length - 1);
+
+        let index = 0;
+        const goTo = (i, animate = true) => {
+          index = Math.max(0, Math.min(i, maxIndex()));
+          track.style.transition = animate ? 'transform .5s cubic-bezier(0.22,1,0.36,1)' : 'none';
+          track.style.transform = `translateX(${-index * cardWidth()}px)`;
+        };
+
+        // Tombol navigasi
+        prev.addEventListener('click', () => goTo(index - 1));
+        next.addEventListener('click', () => goTo(index + 1));
+        window.addEventListener('resize', () => goTo(index, false));
+
+        // Drag/geser dengan Pointer Events
+        let down = false, startX = 0, startT = 0, pid = null;
+        const parseTranslate = () => {
+          const m = track.style.transform.match(/-?\d+\.?\d*/g);
+          return m ? parseFloat(m[0]) : 0;
+        };
+
+        track.style.touchAction = 'pan-y';
+        track.addEventListener('pointerdown', (e) => {
+          down = true;
+          pid = e.pointerId;
+          track.setPointerCapture(pid);
+          startX = e.clientX;
+          startT = parseTranslate();
+          track.style.transition = 'none';
+        });
+
+        track.addEventListener('pointermove', (e) => {
+          if (!down) return;
+          const dx = e.clientX - startX;
+          track.style.transform = `translateX(${startT + dx}px)`;
+        });
+
+        const end = () => {
+          if (!down) return;
+          down = false;
+          try { track.releasePointerCapture(pid); } catch {}
+          const cur = parseTranslate();
+          const delta = cur - startT;
+          const threshold = cardWidth() * 0.25;
+          if (delta < -threshold) goTo(index + 1);
+          else if (delta > threshold) goTo(index - 1);
+          else goTo(index);
+        };
+
+        ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => track.addEventListener(ev, end));
+
+        // Aksesibilitas: keyboard
+        track.setAttribute('tabindex', '0');
+        track.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index - 1); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index + 1); }
+        });
+
+        // Inisialisasi
+        goTo(0);
+      })();
     </script>
   </body>
 </html>
