@@ -8,2653 +8,1153 @@
       name="description"
       content="Portofolio pribadi - Universitas Airlangga"
     />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
       :root {
         --bg: #ffffff;
         --text: #0a0a0a;
-        --muted: #e5e7eb; /* netral */
-        --accent: #d1bbff; /* aksen utama */
-        --border: #d4d4d8;
-        --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        --radius: 14px;
-        --chip-bg: #f4f4f5;
-        /* tombol: efek shadow ungu (aksen utama) */
-        --purple-500: #a78bfa;
-        /* CHANGE: Tambah CSS: purple glow untuk tombol/ikon + grid skills + perbaikan carousel */
-        --accent-purple: #a855f7; /* ungu utama */
-        --accent-purple-20: rgba(168, 85, 247, 0.25);
-        --accent-purple-10: rgba(168, 85, 247, 0.12);
+        --muted: #f4f4f5;
+        --card-bg: #ffffff;
+        --border: #e4e4e7;
+        --accent: #a855f7; /* Ungu Utama */
+        --accent-dark: #7e22ce;
+        --accent-glow: rgba(168, 85, 247, 0.2);
+        --radius: 16px;
+        --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
       }
       html[data-theme="dark"] {
-        --bg: #0b0b0b; /* black */
-        --text: #eaeaea; /* text */
-        --muted: #151515; /* netral */
-        --accent: #d1bbff;
-        --border: #222222;
-        --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-        --chip-bg: #141414;
+        --bg: #09090b;
+        --text: #ededed;
+        --muted: #18181b;
+        --card-bg: #121215;
+        --border: #27272a;
+        --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
       }
 
-      /* Reset dan base */
+      /* Base Reset */
       * {
         box-sizing: border-box;
       }
-      html,
-      body {
-        height: 100%;
-      }
       body {
         margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-          Ubuntu, Cantarell, "Helvetica Neue", Arial;
+        font-family: "Inter", sans-serif;
         background: var(--bg);
         color: var(--text);
         line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        scroll-behavior: smooth;
+        overflow-x: hidden;
       }
       a {
-        color: inherit;
         text-decoration: none;
+        color: inherit;
+        transition: color 0.2s;
       }
       img {
         display: block;
         max-width: 100%;
         height: auto;
       }
-      svg {
-        display: block;
-      }
 
+      /* Layout Utility */
       .container {
-        width: min(1120px, 92%);
+        width: min(1100px, 90%);
         margin-inline: auto;
       }
+      section {
+        padding: 80px 0;
+      }
 
-      /* Nav */
+      /* Navbar */
       .nav {
         position: sticky;
         top: 0;
         z-index: 50;
-        backdrop-filter: saturate(180%) blur(10px);
-        background: color-mix(in oklab, var(--bg) 84%, transparent);
+        background: color-mix(in oklab, var(--bg) 80%, transparent);
+        backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border);
       }
       .nav-inner {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        padding: 12px 0;
-        gap: 16px;
-      }
-      .brand {
-        display: flex;
         align-items: center;
-        gap: 10px;
-        font-weight: 700;
-        letter-spacing: 0.2px;
+        height: 70px;
       }
-      .brand-badge {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        background: var(--accent);
-        display: grid;
-        place-items: center;
-        color: #000;
-        font-size: 14px;
-        font-weight: 800;
-        box-shadow: var(--shadow);
+      .logo {
+        font-weight: 900;
+        font-size: 1.2rem;
+        letter-spacing: -0.5px;
+        color: var(--text);
       }
+
       .nav-links {
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px 14px;
-        align-items: center;
+        gap: 24px;
       }
       .nav-links a {
-        padding: 8px 12px;
-        border-radius: 999px;
-        border: 1px solid transparent;
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0.7;
+        transition: all 0.2s;
       }
       .nav-links a:hover {
-        border-color: var(--border);
-        background: var(--muted);
-      }
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        opacity: 1;
+        color: var(--accent);
       }
 
       /* Buttons */
       .btn {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        border-radius: 99px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+        font-size: 0.95rem;
         gap: 8px;
-        padding: 10px 16px;
-        border-radius: 12px;
-        border: 1px solid var(--border);
-        background: var(--muted);
-        color: var(--text);
-        transition: transform 0.15s ease, background 0.2s ease, border 0.2s ease;
-        box-shadow: var(--shadow);
-      }
-      .btn:hover {
-        transform: translateY(-1px);
-      }
-      .btn:active {
-        transform: translateY(0);
       }
       .btn-primary {
         background: var(--accent);
-        color: #111;
-        border-color: transparent;
-        font-weight: 700;
+        color: white;
+        box-shadow: 0 4px 20px var(--accent-glow);
       }
-      .btn-ghost {
-        background: transparent;
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        background: var(--accent-dark);
+        box-shadow: 0 8px 30px var(--accent-glow);
+      }
+      .btn-outline {
         border-color: var(--border);
+        background: transparent;
+        color: var(--text);
       }
-      .icon-16 {
-        width: 16px;
-        height: 16px;
-      }
-      .icon-20 {
-        width: 20px;
-        height: 20px;
-      }
-
-      /* tombol: efek shadow ungu (aksen utama) */
-      .btn,
-      .btn-ghost,
-      .round,
-      .skill {
-        transition: box-shadow 0.2s ease, transform 0.2s ease,
-          background-color 0.2s ease;
-      }
-      .btn:hover,
-      .btn:focus-visible,
-      .btn-ghost:hover,
-      .btn-ghost:focus-visible,
-      .round:hover,
-      .round:focus-visible,
-      .skill:hover,
-      .skill:focus-visible {
-        box-shadow: 0 10px 24px -10px rgba(167, 139, 250, 0.45),
-          0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent);
-        transform: translateY(-1px);
-        outline: none;
+      .btn-outline:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-glow);
       }
 
-      /* CHANGE: Tambah CSS: purple glow untuk tombol/ikon + grid skills + perbaikan carousel */
-      .btn,
-      .round,
-      .skill {
-        transition: transform 0.2s ease, box-shadow 0.2s ease,
-          outline-color 0.2s ease;
-      }
-      .btn:hover,
-      .btn:focus-visible,
-      .round:hover,
-      .round:focus-visible,
-      .skill:hover,
-      .skill:focus-visible {
-        box-shadow: 0 0 0 4px var(--accent-purple-20),
-          0 10px 28px var(--accent-purple-10);
-        transform: translateY(-1px);
-        outline: none;
-      }
-
-      /* Grid Skills: ikon kecil dan rapat */
-      .skills-grid {
+      .btn-icon {
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-        gap: 12px;
-        align-items: center;
-      }
-      .skill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
-        border-radius: 10px;
-        border: 1px solid rgba(125, 125, 125, 0.18);
-        background: rgba(120, 120, 120, 0.06);
-        color: inherit;
-        text-decoration: none;
-      }
-      .skill .icon {
-        width: 22px;
-        height: 22px;
-        display: inline-block;
-      }
-      .skill .label {
-        font-size: 0.9rem;
-        line-height: 1;
-        white-space: nowrap;
+        place-items: center;
       }
 
-      /* Carousel track: sentuhan lebih halus saat drag */
-      .carousel-track {
-        touch-action: pan-y; /* tetap bisa scroll vertikal saat geser horizontal */
-        cursor: grab;
-      }
-      .carousel-track:active {
-        cursor: grabbing;
-      }
-
-      /* Sections */
-      section {
-        padding: clamp(40px, 6vw, 64px) 0;
-      }
-      .section-head {
-        margin-bottom: 20px;
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-      }
+      /* Section Styling (Kotak Ungu Style) */
       .section-title {
-        font-size: clamp(22px, 2.4vw, 32px);
-        font-weight: 800;
-        letter-spacing: 0.2px;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
       }
-      .section-sub {
-        color: #888;
-        font-size: 14px;
+      .section-title h2 {
+        font-size: 2.2rem;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+      }
+      .section-title span {
+        color: var(--accent);
+        font-weight: 600;
+        display: block;
+        margin-top: 8px;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: var(--accent);
+        opacity: 0.1;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        z-index: 1;
+        border-radius: 12px;
       }
 
-      /* Hero */
+      /* Cards Common Style */
+      .styled-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .styled-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 8px 30px var(--accent-glow);
+        transform: translateY(-4px);
+      }
+
+      /* Hero Section */
       .hero {
-        padding: 48px 0 18px;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        position: relative;
       }
       .hero-grid {
         display: grid;
-        gap: 24px;
         grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
       }
-      @media (min-width: 860px) {
+      @media (min-width: 768px) {
         .hero-grid {
-          grid-template-columns: 1.2fr 0.8fr;
+          grid-template-columns: 1.3fr 0.7fr;
+        }
+      }
+      .hero-text h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 24px;
+        white-space: nowrap;
+      }
+      @media (max-width: 600px) {
+        .hero-text h1 {
+          white-space: normal;
+        }
+      }
+
+      .text-purple {
+        color: transparent;
+        background: linear-gradient(to right, var(--accent), #d8b4fe);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      .hero-desc {
+        font-size: 1.15rem;
+        color: #888;
+        margin-bottom: 32px;
+        max-width: 550px;
+      }
+
+      .hero-img-wrap {
+        display: flex;
+        justify-content: center;
+      }
+      .hero-img-wrap img {
+        filter: drop-shadow(0 20px 40px rgba(168, 85, 247, 0.25));
+        max-height: 480px;
+        object-fit: contain;
+      }
+
+      /* About Section */
+      .about-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+      @media (min-width: 800px) {
+        .about-layout {
+          grid-template-columns: 1fr 1fr;
           align-items: center;
         }
       }
-      .hero-title {
-        font-size: clamp(32px, 5vw, 56px);
-        line-height: 1.1;
-        letter-spacing: -0.4px;
-        font-weight: 900;
-        margin: 0 0 12px;
+      .about-content h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
       }
-      .hero-quote {
-        color: #9ca3af;
-        font-style: italic;
-        margin: 12px 0 22px;
-      }
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .hero-photo {
-        border-radius: 18px;
-        overflow: hidden;
-        border: 1px solid var(--border);
-        background: var(--muted);
-        box-shadow: var(--shadow);
+      .about-content p {
+        color: #888;
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
       }
 
-      /* About */
-      .about-wrap {
+      .stats-grid {
         display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
-        grid-template-columns: 1fr;
+        margin-top: 30px;
       }
-      @media (min-width: 860px) {
-        .about-wrap {
-          grid-template-columns: 1.2fr 0.8fr;
-        }
+      .stat-card {
+        padding: 24px;
+        text-align: center;
       }
-      .about-card,
-      .embed,
-      .card,
-      .timeline,
-      .gallery,
-      .reflection,
-      .contact-card {
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        background: color-mix(in oklab, var(--bg) 94%, transparent);
-        box-shadow: var(--shadow);
-        padding: 18px;
+      .stat-card strong {
+        display: block;
+        font-size: 2rem;
+        color: var(--accent);
+        font-weight: 800;
       }
-      .muted {
-        color: #9ca3af;
-      }
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 8px;
-      }
-      .chip {
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: var(--chip-bg);
-        border: 1px solid var(--border);
-        font-size: 12px;
-      }
-      .about-photos {
+
+      .about-photos-grid {
         display: grid;
-        gap: 12px;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
       }
-      @media (max-width: 420px) {
-        .about-photos {
-          grid-template-columns: 1fr;
+      .about-photos-grid img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 0.3s;
+        border: 1px solid var(--border);
+      }
+      .about-photos-grid img:hover {
+        transform: scale(1.03);
+        border-color: var(--accent);
+      }
+
+      /* Skills Section - CENTERED & ICON ONLY */
+      .skills-wrapper {
+        position: relative;
+      }
+      .skills-container {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 10px 4px 20px 4px;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        /* RATA TENGAH untuk Desktop */
+        justify-content: center;
+      }
+
+      /* Agar di HP tidak terpotong (fallback ke rata kiri kalau layar kecil) */
+      @media (max-width: 800px) {
+        .skills-container {
+          justify-content: flex-start;
         }
       }
 
-      /* Embed PDF */
-      .embed iframe {
-        width: 100%;
-        min-height: clamp(360px, 60vh, 520px);
-        border: none;
-        border-radius: 12px;
+      .skills-container::-webkit-scrollbar {
+        height: 6px;
+      }
+      .skills-container::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 10px;
+      }
+      .skills-container::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+      }
+
+      .skill-item {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px; /* Ukuran pas logo */
+        height: 60px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        transition: all 0.3s;
+        cursor: help;
+      }
+      .skill-item img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+      }
+      .skill-item:hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 20px var(--accent-glow);
+        transform: translateY(-4px);
         background: var(--muted);
       }
-      .embed .hint {
-        margin-top: 10px;
-        font-size: 12px;
-        color: #9ca3af;
-      }
 
-      /* Projects - carousel */
-      .carousel {
+      /* Projects Carousel */
+      .carousel-wrap {
         position: relative;
         overflow: hidden;
-        border-radius: var(--radius);
-        border: 1px solid var(--border);
-        background: color-mix(in oklab, var(--bg) 96%, transparent);
-        /* agar horizontal drag nyaman di touch */
-        touch-action: pan-y;
+        padding: 10px 0;
       }
       .carousel-track {
         display: flex;
-        gap: 16px;
-        padding: 16px;
-        transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        gap: 24px;
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         cursor: grab;
       }
       .carousel-track:active {
         cursor: grabbing;
       }
-      .card {
-        width: clamp(260px, 44vw, 340px);
-        flex: 0 0 auto;
-        display: grid;
-        gap: 12px;
-        background: color-mix(in oklab, var(--bg) 96%, transparent);
+
+      .project-card {
+        min-width: 340px;
+        max-width: 340px;
+        display: flex;
+        flex-direction: column;
       }
-      .card .media {
-        border-radius: 12px;
+      @media (max-width: 400px) {
+        .project-card {
+          min-width: 85vw;
+        }
+      }
+      .project-img {
+        height: 200px;
+        background: var(--muted);
         overflow: hidden;
-        border: 1px solid var(--border);
-        background: var(--muted);
+        border-bottom: 1px solid var(--border);
       }
-      .card h3 {
-        margin: 0;
-        font-size: 18px;
-        font-weight: 800;
+      .project-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
       }
-      .card p {
-        margin: 0;
-        color: #9ca3af;
-        font-size: 14px;
+      .project-card:hover .project-img img {
+        transform: scale(1.1);
       }
-      .card .links {
+      .project-info {
+        padding: 24px;
+        flex: 1;
         display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
+        flex-direction: column;
       }
-      .carousel-nav {
-        position: absolute;
-        inset: auto 8px 8px auto;
-        display: flex;
-        gap: 8px;
-      }
-      .round {
-        width: 36px;
-        height: 36px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        background: color-mix(in oklab, var(--bg) 86%, transparent);
-        border: 1px solid var(--border);
-      }
-      .round:hover {
-        background: var(--muted);
+      .project-info h3 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
       }
 
-      /* Timeline + Gallery (Organisasi & Pengalaman) */
+      .carousel-controls {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      /* Experience Section - SCROLLABLE */
+      .experience-box {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.05);
+      }
+
+      .timeline-scroll-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+        padding-right: 16px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--muted);
+      }
+
+      .timeline-scroll-wrapper::-webkit-scrollbar {
+        width: 6px;
+      }
+      .timeline-scroll-wrapper::-webkit-scrollbar-track {
+        background: var(--muted);
+        border-radius: 10px;
+      }
+      .timeline-scroll-wrapper::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 10px;
+      }
+
       .timeline {
         display: grid;
-        gap: 16px;
+        gap: 0;
       }
       .timeline-item {
-        display: grid;
-        gap: 6px;
-        border-left: 3px solid var(--accent);
-        padding-left: 12px;
+        position: relative;
+        padding-left: 30px;
+        padding-bottom: 30px;
+        border-left: 2px solid var(--border);
       }
-      .timeline-item .role {
-        font-weight: 800;
+      .timeline-item:last-child {
+        border-left: 2px solid transparent;
+        padding-bottom: 0;
       }
-      .timeline-item .org {
-        color: #9ca3af;
-        font-size: 14px;
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -6px;
+        top: 6px;
+        width: 10px;
+        height: 10px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px var(--bg);
       }
-      .gallery {
-        margin-top: 16px;
+      .timeline-content {
+        background: var(--muted);
+        padding: 16px 20px;
+        border-radius: 12px;
+        transition: transform 0.2s;
+        border: 1px solid transparent;
       }
-      .grid {
-        display: grid;
-        gap: 12px;
-        grid-template-columns: repeat(2, 1fr);
+      .timeline-item:hover .timeline-content {
+        transform: translateX(5px);
+        border-color: var(--accent);
+        background: var(--card-bg);
       }
-      @media (min-width: 700px) {
-        .grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      @media (max-width: 420px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .grid img {
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        cursor: zoom-in;
-        transition: transform 0.2s ease;
-      }
-      .grid img:hover {
-        transform: scale(1.02);
-      }
-
-      /* Lightbox */
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        display: none;
-        place-items: center;
-        background: rgba(0, 0, 0, 0.72);
-        z-index: 60;
-        padding: 24px;
-      }
-      .lightbox.open {
-        display: grid;
-      }
-      .lightbox img {
-        max-height: 88vh;
-        border-radius: 14px;
-      }
-
-      /* Reflection */
-      .reflection p {
-        margin: 0;
-      }
-
-      /* Contact */
-      .contact-grid {
-        display: grid;
-        gap: 14px;
-        grid-template-columns: 1fr;
-      }
-      @media (min-width: 820px) {
-        .contact-grid {
-          grid-template-columns: 1.2fr 0.8fr;
-        }
-      }
-      .contact-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-      .field {
-        display: grid;
-        gap: 6px;
-      }
-      .field input,
-      .field textarea {
-        width: 100%;
-        padding: 10px 12px;
-        border-radius: 10px;
-        border: 1px solid var(--border);
-        background: color-mix(in oklab, var(--bg) 96%, transparent);
+      .role {
+        font-weight: 700;
+        font-size: 1.1rem;
         color: var(--text);
       }
-      .field textarea {
-        min-height: 120px;
-        resize: vertical;
+      .org {
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        display: block;
+      }
+      .desc {
+        font-size: 0.9rem;
+        color: #888;
+      }
+
+      /* Contact Section */
+      .contact-card {
+        background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+        padding: 60px 40px;
+        border-radius: 30px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px -10px rgba(76, 29, 149, 0.5);
+      }
+      .contact-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .contact-card h2 {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 2;
+      }
+      .contact-card p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 32px;
+        max-width: 600px;
+        margin-inline: auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .btn-white {
+        background: white;
+        color: var(--accent-dark);
+        border: none;
+      }
+      .btn-white:hover {
+        background: #f3f4f6;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .btn-transparent {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .btn-transparent:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: white;
       }
 
       /* Footer */
       footer {
-        padding: 32px 0;
-        color: #9ca3af;
-        font-size: 14px;
+        padding: 40px 0;
+        text-align: center;
+        color: #666;
+        font-size: 0.9rem;
         border-top: 1px solid var(--border);
+        margin-top: 40px;
       }
 
-      /* Animations: reveal on scroll */
-      .reveal {
-        opacity: 0;
-        transform: translateY(14px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* ------------- FUN STUFF ------------- */
-      :root {
-        --fun-z: 49;
-        --fun-z-fab: 60;
-        --spin-normal: 18s;
-        --spin-fast: 4s;
-        --fun-gap: 12px;
-        --fun-size: 28px;
-        --fun-accent: var(--accent);
-        --fun-text: var(--text);
-        --fun-bg: color-mix(in oklab, var(--bg) 92%, transparent);
-        --fun-border: var(--border);
-      }
-
-      /* Overlay utama (pointer-events none secara default agar tidak mengganggu klik)
-         Kecuali tombol/panda/ikon punya pointer-events: auto */
-      #fun-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: var(--fun-z);
-        pointer-events: none;
-      }
-
-      /* Gutter pinggir kiri/kanan tempat ikon-ikon “teknik” */
-      .fun-gutter {
-        position: absolute;
-        top: 72px; /* di bawah nav sticky */
-        bottom: 72px;
-        width: 56px;
-        display: grid;
-        align-content: space-between;
-        justify-items: center;
-        gap: var(--fun-gap);
-        padding: var(--fun-gap) 8px;
-        pointer-events: none;
-      }
-      .fun-left {
-        left: 0;
-      }
-      .fun-right {
-        right: 0;
-      }
-
-      .fun-icon-wrap {
-        width: max(var(--fun-size), 24px);
-        height: max(var(--fun-size), 24px);
-        display: grid;
-        place-items: center;
-        border-radius: 12px;
-        background: var(--fun-bg);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
-        pointer-events: auto; /* boleh di-hover untuk animasi */
-      }
-
-      .fun-icon {
-        width: 20px;
-        height: 20px;
-        color: var(--fun-text);
-        opacity: 0.9;
-        transform-origin: 50% 50%;
-        animation: fun-spin var(--spin-normal) linear infinite;
-      }
-      .fun-icon-wrap:hover .fun-icon {
-        animation-duration: var(--spin-fast);
-      }
-
-      @keyframes fun-spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Tombol mengambang: Email */
-      .fun-fab {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: var(--fun-z-fab);
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px; /* dikurangi padding-nya agar tidak terlalu besar di layar kecil */
-        border-radius: 999px;
-        background: var(--fun-accent);
-        color: #111;
-        border: 1px solid transparent;
-        box-shadow: var(--shadow);
-        font-weight: 800;
-        pointer-events: auto;
-      }
-      .fun-fab:focus-visible {
-        outline: 2px solid var(--fun-accent);
-        outline-offset: 2px;
-      }
-
-      /* Panel demo + tombol pembuka */
-      .fun-demo-toggle {
-        position: fixed;
-        left: 18px;
-        bottom: 18px;
-        z-index: var(--fun-z-fab);
-        pointer-events: auto;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        background: var(--fun-bg);
-        color: var(--fun-text);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
-        font-weight: 700;
-      }
-      .fun-demo-panel {
-        position: fixed;
-        left: 18px;
-        bottom: 68px;
-        z-index: var(--fun-z-fab);
-        min-width: 240px;
-        padding: 12px;
-        border-radius: 12px;
-        background: var(--fun-bg);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
+      /* Mobile Menu */
+      .mobile-toggle {
         display: none;
-        pointer-events: auto;
-      }
-      .fun-demo-panel.open {
-        display: grid;
-        gap: 8px;
-      }
-      .fun-demo-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 10px;
-        border-radius: 10px;
-        border: 1px solid var(--fun-border);
-        background: color-mix(in oklab, var(--bg) 96%, transparent);
-        color: var(--fun-text);
-      }
-
-      /* Panda berjalan menyusuri web */
-      /* Panda fixed button */
-      .fun-panda {
-        position: fixed;
-        bottom: 24px;
-        left: -80px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: var(--fun-bg);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
-        z-index: var(--fun-z);
-        pointer-events: auto;
-        cursor: pointer;
-        animation: panda-walk 16s linear infinite alternate;
-      }
-
-      .fun-panda[data-dir="left"] {
-        animation-direction: alternate-reverse;
-      }
-
-      /* Ganti icon panda jadi img */
-      .fun-panda img {
-        width: 36px;
-        height: 36px;
-        object-fit: contain;
-      }
-
-      @keyframes panda-walk {
-        0% {
-          transform: translateX(-10vw) translateY(0);
-        }
-        50% {
-          transform: translateX(60vw) translateY(-2vh);
-        }
-        100% {
-          transform: translateX(92vw) translateY(0);
-        }
-      }
-
-      /* Sparkle ketika diklik */
-      .fun-sparkle {
-        position: fixed;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: radial-gradient(
-            circle at 30% 30%,
-            var(--fun-accent),
-            transparent 60%
-          ),
-          radial-gradient(
-            circle at 70% 70%,
-            color-mix(in oklab, var(--fun-accent) 70%, transparent),
-            transparent 70%
-          );
-        opacity: 0.85;
-        transform: translate(-50%, -50%) scale(0.6);
-        pointer-events: none;
-        z-index: var(--fun-z-fab);
-        animation: sparkle-pop 0.9s ease-out forwards;
-        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
-      }
-
-      @keyframes sparkle-pop {
-        60% {
-          transform: translate(-50%, -50%) scale(1.35) rotate(20deg);
-          opacity: 0.9;
-        }
-        100% {
-          transform: translate(-50%, -50%) scale(0.1) rotate(140deg);
-          opacity: 0;
-        }
-      }
-
-      /* Kurangi gerak jika prefer-reduced-motion */
-      @media (prefers-reduced-motion: reduce) {
-        .fun-icon,
-        .fun-panda {
-          animation: none !important;
-        }
-        .fun-sparkle {
-          display: none !important;
-        }
-      }
-
-      /* ------------- END FUN STUFF ------------- */
-
-      /* CHANGE: Tambahkan CSS khusus navbar mobile (hamburger) */
-    </style>
-    <style>
-      /* Default: sembunyikan tombol hamburger di layar besar */
-      .nav-toggle {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 8px 10px;
-        border-radius: 10px;
-        background: var(--muted);
-        border: 1px solid var(--border);
+        background: none;
+        border: none;
         color: var(--text);
+        font-size: 1.5rem;
       }
-      .nav-toggle svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      /* Scrim latar saat menu terbuka */
-      .nav-scrim {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        z-index: 48; /* di bawah nav (50) dan di atas konten */
-        display: none;
-      }
-      .nav-scrim.show {
-        display: block;
-      }
-
-      /* Nonaktifkan scroll saat menu mobile terbuka */
-      body.nav-open {
-        overflow: hidden;
-      }
-
-      /* Breakpoint untuk mobile/tablet kecil */
-      /* CHANGE: Perluas breakpoint ke iPad: dari 768px -> 1024px */
-      @media (max-width: 1024px) {
-        /* CHANGE: Sesuaikan tinggi navbar mobile/tablet */
-        .nav {
-          --nav-h: 60px;
-        }
-        .nav-inner {
-          min-height: var(--nav-h, 60px);
-        }
-        /* Tampilkan hamburger, sembunyikan nav desktop */
-        .nav-toggle {
-          display: inline-flex;
-        }
-        /* Nav links menjadi panel overlay di bawah header */
+      @media (max-width: 768px) {
         .nav-links {
-          position: fixed !important;
-          top: var(--nav-h, 60px) !important;
-          left: 0;
-          right: 0;
-          z-index: 50;
-          display: none !important;
-          flex-direction: column;
-          align-items: stretch;
-          gap: 6px;
-          padding: 12px 16px 16px;
-          background: color-mix(in oklab, var(--bg) 96%, transparent);
-          border-bottom: 1px solid var(--border);
+          display: none;
         }
-        .nav-links a {
-          padding: 10px 12px;
-          border-radius: 10px;
+        .mobile-toggle {
+          display: block;
         }
-        .nav-links.open {
-          display: flex !important;
+        .contact-card {
+          padding: 40px 20px;
+        }
+        .contact-card h2 {
+          font-size: 2rem;
         }
       }
     </style>
   </head>
   <body>
-    <div class="fun-panda">
-      <img src="img/pandas.png" alt="Panda" />
-    </div>
     <header class="nav">
       <div class="container nav-inner">
-        <div class="brand">
-          <div class="brand-badge" aria-hidden="true">NAURAHDF</div>
-        </div>
-        <!-- CHANGE: Tombol hamburger untuk mobile -->
-        <button
-          class="nav-toggle"
-          id="navToggle"
-          aria-label="Buka menu"
-          aria-controls="navLinks"
-          aria-expanded="false"
-        >
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M4 6h16M4 12h16M4 18h16"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-            />
-          </svg>
-        </button>
-        <!-- CHANGE: Tambah id pada nav agar bisa ditoggle -->
-        <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
-          <a href="#home">Home</a>
+        <a href="#" class="logo">NAURAHDF</a>
+
+        <nav class="nav-links">
           <a href="#about">About</a>
-          <a href="#resume">Resume/CV</a>
-          <a href="#skills">Skills</a>
+          <a href="#skills">Tools</a>
           <a href="#projects">Projects</a>
-          <a href="#org-exp">Organization & Experience</a>
-          <a href="#reflections">Reflections</a>
+          <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
         </nav>
-        <div class="nav-actions">
-          <button
-            class="btn btn-ghost"
-            id="themeToggle"
-            aria-label="Toggle tema"
-            title="Toggle tema"
+
+        <button
+          class="btn btn-outline btn-icon"
+          id="themeToggle"
+          aria-label="Toggle Theme"
+        >
+          <svg
+            id="sunIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <span id="themeIcon" aria-hidden="true"></span>
-          </button>
-        </div>
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </div>
     </header>
 
-    <!-- CHANGE: Scrim untuk menutup menu saat area gelap diklik -->
-    <div class="nav-scrim" id="navScrim"></div>
-
-    <main>
-      <section id="home" class="hero">
-        <div class="container hero-grid">
-          <div class="reveal">
-            <h1 class="hero-title">
-              Halo, I'm
-              <span
-                style="
-                  background: var(--accent);
-                  color: #111;
-                  padding: 2px 8px;
-                  border-radius: 8px;
-                "
-                >Naurah</span
-              >
-            </h1>
-            <p class="muted">Informatics Engineering, Airlangga University</p>
-            <p class="hero-quote">
-              I'm a fifth-semester Informatics Engineering student with
-              interests in data analysis, design, and programming. I've
-              participated in various internal and external organizations and
-              competitions, where I’ve honed my leadership, teamwork, and
-              communication skills. These experiences have strengthened my
-              ability to manage projects effectively, collaborate with diverse
-              teams, and deliver innovative digital solutions.
-            </p>
-            <div class="hero-actions">
-              <!-- 🔗 Lihat CV -->
-              <a
-                class="btn btn-primary"
-                id="ctaCV"
-                href="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=sharing"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg
-                  class="icon-20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                    stroke="#111"
-                    stroke-width="1.5"
-                  />
-                  <path d="M14 2v6h6" stroke="#111" stroke-width="1.5" />
-                  <path d="M8 13h8M8 17h8" stroke="#111" stroke-width="1.5" />
-                </svg>
-                Lihat CV
-              </a>
-
-              <!-- 🔗 LinkedIn -->
-              <a
-                class="btn"
-                id="ctaLinkedIn"
-                href="https://www.linkedin.com/in/naurahdila/"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg
-                  class="icon-20"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4v15h-4zM8.5 8.5h3.8v2.1h.1c.5-1 1.7-2.1 3.6-2.1 3.8 0 4.5 2.5 4.5 5.7v9.3h-4v-8.2c0-2 0-4.6-2.8-4.6s-3.2 2.2-3.2 4.5v8.3h-4v-15z"
-                  />
-                </svg>
-                LinkedIn
-              </a>
-
-              <!-- 📧 Email -->
-              <a
-                class="btn"
-                id="ctaEmail"
-                href="mailto:nrhdilaf13@gmail.com"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg
-                  class="icon-20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="3"
-                    y="5"
-                    width="18"
-                    height="14"
-                    rx="2"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M3 7l9 7 9-7"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                  />
-                </svg>
-                Email
-              </a>
-
-              <!-- 💬 WhatsApp -->
-              <a
-                class="btn"
-                id="ctaWA"
-                href="https://wa.me/6282139521237"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg
-                  class="icon-20"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.62-6.003C.122 5.281 5.403 0 12.057 0c3.183 0 6.167 1.24 8.414 3.488a11.823 11.823 0 0 1 3.486 8.414c-.004 6.654-5.286 11.936-11.94 11.936a11.9 11.9 0 0 1-6.004-1.62L.057 24zm6.597-3.807c1.735.995 3.276 1.591 5.392 1.593 5.448.003 9.886-4.43 9.889-9.88.002-5.465-4.415-9.885-9.881-9.888-5.45 0-9.886 4.43-9.889 9.88-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.987zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.668.149-.198.297-.767.967-.94 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.668-1.612-.916-2.205-.242-.58-.487-.5-.668-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413z"
-                  />
-                </svg>
-                WhatsApp
-              </a>
-            </div>
-          </div>
-          <div class="">
-            <img
-              src="img/naurah.png"
-              alt="Foto HD Anda"
-              width="1000"
-              height="700"
-            />
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Hello, I'm <span class="text-purple">Naurah</span></h1>
+          <p class="hero-desc">
+            Informatics Engineering student at Airlangga University. Building
+            pixel-perfect web experiences with modern tech.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap">
+            <a
+              href="https://drive.google.com/file/d/1a0AciFG7cFEjQ81zfiinXFkeJPiVeUB1/view?usp=drive_link"
+              target="_blank"
+              class="btn btn-primary"
+              >Download CV</a
+            >
+            <a
+              href="https://www.linkedin.com/in/naurahdila/"
+              target="_blank"
+              class="btn btn-outline"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/naurahdila"
+              target="_blank"
+              class="btn btn-outline"
+              >GitHub</a
+            >
+            <a href="https://wa.me/6282139521237" class="btn btn-outline">Contact</a>
           </div>
         </div>
-      </section>
-
-      <section id="about">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">About</h2>
-            <span class="section-sub">Biography • Major • Skill • Goals</span>
-          </div>
-          <div class="about-wrap">
-            <article class="about-card reveal">
-              <h3 style="margin: 0 0 8px; font-weight: 800">Biography</h3>
-              <p>
-                I'm Student
-                <strong>Airlangga University</strong> My Major
-                <strong>Informatics Engineering</strong>. Beyond academics, I
-                have actively participated in various internal and external
-                organizations, committees, and competitions, where I’ve honed my
-                leadership, teamwork, and communication skills. These
-                experiences have strengthened my ability to manage projects
-                effectively, collaborate with diverse teams, and deliver
-                innovative digital solutions.
-              </p>
-              <div class="chips">
-                <span class="chip">#UI/UX</span>
-                <span class="chip">#WebDev</span>
-                <span class="chip">#Komunitas</span>
-                <span class="chip">#Research</span>
-              </div>
-              <div style="margin-top: 14px; display: grid; gap: 6px">
-                <div>
-                  <strong>Skills</strong> Front-end, Design UI UX, Design Canva
-                  and Figma, Web Design & Program Design, Leadership, Teamwork
-                </div>
-                <div>
-                  <strong>Goals:</strong> innovative technology professional who
-                  can apply data analysis, programming, and design thinking to
-                  develop impactful digital solutions that improve people’s
-                  lives.
-                </div>
-                <div>
-                  <strong>introductory video</strong>
-                  <a
-                    id="introVideoLink"
-                    href="#"
-                    target="_blank"
-                    rel="noopener"
-                    class="btn btn-ghost"
-                    style="padding: 6px 10px"
-                    >watch the video</a
-                  >
-                </div>
-                <div>
-                  <strong>LinkedIn:</strong>
-                  <a
-                    id="aboutLinkedIn"
-                    href="#"
-                    target="_blank"
-                    rel="noopener"
-                    class="btn btn-ghost"
-                    style="padding: 6px 10px"
-                    >visit profile</a
-                  >
-                </div>
-              </div>
-            </article>
-            <aside class="reveal">
-              <div class="about-photos">
-                <img
-                  data-ph="Kegiatan Kampus 1"
-                  data-ph-size="600x400"
-                  alt="Foto kegiatan kampus 1"
-                  src="./img/nrh.png"
-                />
-                <img
-                  data-ph="Kegiatan Kampus 2"
-                  data-ph-size="600x400"
-                  alt="Foto kegiatan kampus 2"
-                  src="./img/ekraf.png"
-                />
-                <img
-                  data-ph="Kolase 1"
-                  data-ph-size="600x400"
-                  alt="Kolase foto 1"
-                  src="./img/hima.png"
-                />
-                <img
-                  data-ph="Kolase 2"
-                  data-ph-size="600x400"
-                  alt="Kolase foto 2"
-                  src="./img/ukm.png"
-                />
-              </div>
-            </aside>
-          </div>
+        <div class="hero-img-wrap">
+          <img src="img/naurah.png" alt="Naurah Dila" data-ph="Foto Naurah" />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="resume">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">Resume / CV</h2>
+    <section id="about">
+      <div class="container">
+        <div class="about-layout">
+          <div class="about-photos-grid">
+            <img src="./img/nrh.png" data-ph="Activity 1" alt="Activity" />
+            <img src="./img/ekraf.png" data-ph="Activity 2" alt="Activity" />
+            <img src="./img/hima.png" data-ph="Activity 3" alt="Activity" />
+            <img src="./img/agi.jpg" data-ph="Activity 4" alt="Activity" />
           </div>
-
-          <div class="embed reveal">
-            <!-- 👇 Menampilkan CV dari Google Drive -->
-            <iframe
-              id="cvFrame"
-              title="CV Anda (PDF)"
-              referrerpolicy="no-referrer"
-              src="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link"
-              width="100%"
-              height="600"
-              style="border: none; border-radius: 8px"
-              allow="autoplay"
-            ></iframe>
-
+          <div class="about-content">
             <div
-              style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap"
+              class="section-title"
+              style="
+                text-align: left;
+                width: auto;
+                display: block;
+                margin-bottom: 20px;
+              "
             >
-              <!-- 🔗 Tombol Buka CV -->
-              <a
-                class="btn btn-primary"
-                id="openCV"
-                href="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg class="icon-20" viewBox="0 0 24 24" fill="none">
-                  <path d="M14 3h7v7" stroke="#111" stroke-width="1.5" />
-                  <path d="M10 14L21 3" stroke="#111" stroke-width="1.5" />
-                  <path
-                    d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"
-                    stroke="#111"
-                    stroke-width="1.5"
-                  />
-                </svg>
-                OPEN CV
-              </a>
-
-              <!-- ⬇️ Tombol Unduh CV -->
-              <a
-                class="btn btn-ghost"
-                id="downloadCV"
-                href="https://drive.google.com/uc?export=download&id=1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40"
-                target="_blank"
-                rel="noopener"
-              >
-                Download CV
-              </a>
+              <h2>About Me</h2>
+              <span style="display: inline-block">Who I Am</span>
+            </div>
+            <p>
+              I am a dedicated student majoring in
+              <strong>Informatics Engineering</strong>. My journey involves a
+              balance between technical coding skills and creative design
+              thinking.
+            </p>
+            <p>
+              Active in various organizations such as <strong>HIMTI</strong> and
+              <strong>Karang Taruna</strong>, I have developed strong leadership
+              and project management capabilities.
+            </p>
+            <div class="stats-grid">
+              <div class="stat-card styled-card">
+                <strong>5th</strong>
+                <span>Semester</span>
+              </div>
+              <div class="stat-card styled-card">
+                <strong>3+</strong>
+                <span>Years Exp</span>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Tambah Section Skills (sebelum Projects) -->
-      <section id="skills">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">Skills</h2>
-            <span class="section-sub">Tools, Languages & Frameworks</span>
-          </div>
+    <section id="skills" style="background: var(--muted)">
+      <div class="container">
+        <div class="section-title">
+          <h2>Tech & Tools</h2>
+          <span>Swipe to see more</span>
+        </div>
 
-          <div class="skills-grid reveal" aria-label="Skill icons">
-            <!-- CHANGE: Tambah ikon kecil + tautan resmi -->
-            <a
-              class="skill"
-              href="https://www.canva.com/"
-              target="_blank"
-              rel="noopener"
-            >
+        <div class="skills-wrapper">
+          <div class="skills-container">
+            <div class="skill-item" title="Laravel">
               <img
-                class="icon"
-                src="https://cdn.simpleicons.org/canva"
-                alt="Canva"
-              />
-              <span class="label">Canva</span>
-            </a>
-            <a
-              class="skill"
-              href="https://www.figma.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                class="icon"
-                src="https://cdn.simpleicons.org/figma"
-                alt="Figma"
-              />
-              <span class="label">Figma</span>
-            </a>
-            <a
-              class="skill"
-              href="https://developer.mozilla.org/docs/Web/HTML"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                class="icon"
-                src="https://cdn.simpleicons.org/html5"
-                alt="HTML5"
-              />
-              <span class="label">HTML</span>
-            </a>
-            <a
-              class="skill"
-              href="https://developer.mozilla.org/docs/Web/CSS"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                class="icon"
-                src="https://cdn.simpleicons.org/css3"
-                alt="CSS3"
-              />
-              <span class="label">CSS</span>
-            </a>
-            <a
-              class="skill"
-              href="https://laravel.com/"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                class="icon"
-                src="https://cdn.simpleicons.org/laravel"
+                src="https://cdn.simpleicons.org/laravel/FF2D20"
                 alt="Laravel"
               />
-              <span class="label">Laravel</span>
-            </a>
-            <a
-              class="skill"
-              href="https://www.python.org/"
-              target="_blank"
-              rel="noopener"
-            >
+            </div>
+            <div class="skill-item" title="Flutter">
               <img
-                class="icon"
-                src="https://cdn.simpleicons.org/python"
-                alt="Python"
-              />
-              <span class="label">Python</span>
-            </a>
-            <a
-              class="skill"
-              href="https://flutter.dev/"
-              target="_blank"
-              rel="noopener"
-            >
-              <img
-                class="icon"
-                src="https://cdn.simpleicons.org/flutter"
+                src="https://cdn.simpleicons.org/flutter/02569B"
                 alt="Flutter"
               />
-              <span class="label">Flutter</span>
-            </a>
-            <a
-              class="skill"
-              href="https://go.dev/"
-              target="_blank"
-              rel="noopener"
-            >
-              <img class="icon" src="https://cdn.simpleicons.org/go" alt="Go" />
-              <span class="label">Go</span>
-            </a>
-            <a
-              class="skill"
-              href="https://www.mysql.com/"
-              target="_blank"
-              rel="noopener"
-            >
+            </div>
+            <div class="skill-item" title="Go">
+              <img src="https://cdn.simpleicons.org/go/00ADD8" alt="Go" />
+            </div>
+            <div class="skill-item" title="Canva">
               <img
-                class="icon"
-                src="https://cdn.simpleicons.org/mysql"
-                alt="MySQL"
+                src="https://logos-world.net/wp-content/uploads/2020/02/Canva-Logo.png"
+                alt="Canva"
               />
-              <span class="label">MySQL</span>
-            </a>
-            <a
-              class="skill"
-              href="https://www.postgresql.org/"
-              target="_blank"
-              rel="noopener"
-            >
+            </div>
+            <div class="skill-item" title="Figma">
+              <img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Figma" />
+            </div>
+            <div class="skill-item" title="MongoDB">
               <img
-                class="icon"
-                src="https://cdn.simpleicons.org/postgresql"
-                alt="PostgreSQL"
+                src="https://cdn.simpleicons.org/mongodb/47A248"
+                alt="MongoDB"
               />
-              <span class="label">PostgreSQL</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">Projects / Works</h2>
-            <span class="section-sub">work while at Airlangga University</span>
-          </div>
-
-          <div class="carousel reveal" aria-label="Daftar proyek">
-            <div class="carousel-track" id="carouselTrack">
-              <article class="card">
-                <div class="media">
-                  <img
-                    data-ph="Project Dashboard"
-                    data-ph-size="800x500"
-                    alt="Thumbnail Proyek 1"
-                    src="./img/nora.png"
-                  />
-                </div>
-                <div>
-                  <h3>Website for Selling Muslim Gamis & Fashion</h3>
-                  <p>
-                    A modern e-commerce website designed to sell premium gamis
-                    and Muslim fashion products. The platform provides an
-                    elegant interface, easy navigation, and secure transactions
-                    to enhance the shopping experience for users.
-                  </p>
-                </div>
-                <div class="links">
-                  <a
-                    class="btn btn-ghost"
-                    href="https://naurahdila.github.io/N.O.R.A/"
-                    target="_blank"
-                    rel="noopener"
-                    >Demo</a
-                  >
-                </div>
-              </article>
-              <article class="card">
-                <div class="media">
-                  <img
-                    data-ph="Project Dashboard"
-                    data-ph-size="800x500"
-                    alt="Thumbnail Proyek 1"
-                    src="./img/canva.png"
-                  />
-                </div>
-                <div>
-                  <h3>Documentator editing in CANVA</h3>
-                  <p>
-                    Documentator editing in Canva means creating or modifying
-                    visual documents such as reports or presentations using
-                    Canva’s design tools. It allows users to collaborate easily
-                    and produce attractive, professional-looking documents.
-                  </p>
-                </div>
-                <div class="links">
-                  <a
-                    class="btn btn-ghost"
-                    href="https://www.canva.com/design/DAGsHVJ09hQ/wmJyRiS2nH8f5glppYd-JQ/edit?utm_content=DAGsHVJ09hQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-                    target="_blank"
-                    rel="noopener"
-                    >Demo</a
-                  >
-                </div>
-              </article>
-              <article class="card">
-                <div class="media">
-                  <img
-                    data-ph="Research Poster"
-                    data-ph-size="800x500"
-                    alt="Thumbnail Proyek 2"
-                    src="./img/bimbel.png"
-                  />
-                </div>
-                <div>
-                  <h3>Bimbelhub : your smart tutoring solution of choice</h3>
-                  <p>
-                    BimbelHub is a smart tutoring platform that helps students
-                    find the most suitable tutoring centers based on their
-                    needs, goals, and preferences. It offers an easy-to-use
-                    interface, reliable information, and personalized
-                    recommendations to support effective learning.
-                  </p>
-                </div>
-                <div class="links">
-                  <a
-                    class="btn btn-ghost"
-                    href="https://naurahdila.github.io/bimbelhub/"
-                    target="_blank"
-                    rel="noopener"
-                    >Demo</a
-                  >
-                </div>
-              </article>
-
-              <article class="card">
-                <div class="media">
-                  <img
-                    data-ph="Mobile App UI"
-                    data-ph-size="800x500"
-                    alt="Thumbnail Proyek 3"
-                    src="./img/figma.png"
-                  />
-                </div>
-                <div>
-                  <h3>FIGMA bimbelhub</h3>
-                  <p>
-                    A modern tutoring platform design created in Figma, focusing
-                    on intuitive navigation, clean UI, and seamless access to
-                    educational programs.
-                  </p>
-                </div>
-                <div class="links">
-                  <a
-                    class="btn btn-ghost"
-                    href="https://www.figma.com/design/nZiI2Jy05WaT8r6HBxaS7D/BimbelHub.?node-id=1-2&t=lW6zNKSMsKrCovav-1"
-                    target="_blank"
-                    rel="noopener"
-                    >Figma</a
-                  >
-                </div>
-              </article>
             </div>
-            <div class="carousel-nav" aria-hidden="false">
-              <button class="round" id="prevSlide" aria-label="Sebelumnya">
-                <svg class="icon-20" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M15 6l-6 6 6 6"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </button>
-              <button class="round" id="nextSlide" aria-label="Berikutnya">
-                <svg class="icon-20" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 6l6 6-6 6"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </button>
+            <div class="skill-item" title="MySQL">
+              <img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" />
+            </div>
+            <div class="skill-item" title="HTML5">
+              <img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML" />
+            </div>
+            <div class="skill-item" title="CSS3">
+              <img
+                src="https://cdn.freebiesupply.com/logos/large/2x/css3-logo-png-transparent.png"
+                alt="CSS"
+              />
+            </div>
+            <div class="skill-item" title="Python">
+              <img
+                src="https://cdn.simpleicons.org/python/3776AB"
+                alt="Python"
+              />
+            </div>
+            <div class="skill-item" title="Word">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/027/179/376/non_2x/microsoft-word-icon-logo-symbol-free-png.png"
+                alt="Word"
+              />
+            </div>
+            <div class="skill-item" title="Excel">
+              <img
+                src="https://i.pinimg.com/originals/1b/db/8a/1bdb8ac897512116cbac58ffe7560d82.png"
+                alt="Excel"
+              />
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="org-exp">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">Organization & Experiencen</h2>
-            <span class="section-sub"></span>
+    <section id="projects">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Projects</h2>
+          <span>Slide to explore</span>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="carousel-track" id="track">
+            <article class="project-card styled-card">
+              <div class="project-img">
+                <img src="./img/nora.png" data-ph="NORA Website" alt="NORA" />
+              </div>
+              <div class="project-info">
+                <h3>N.O.R.A Fashion</h3>
+                <p>
+                  E-commerce website for premium Muslim fashion with elegant UI.
+                </p>
+                <a
+                  href="https://naurahdila.github.io/N.O.R.A/"
+                  target="_blank"
+                  class="btn btn-outline"
+                  style="font-size: 0.8rem"
+                  >Live Demo</a
+                >
+              </div>
+            </article>
+
+            <article class="project-card styled-card">
+              <div class="project-img">
+                <img
+                  src="./img/bimbel.png"
+                  data-ph="BimbelHub"
+                  alt="BimbelHub"
+                />
+              </div>
+              <div class="project-info">
+                <h3>BimbelHub Platform</h3>
+                <p>
+                  Smart tutoring finder platform connecting students with
+                  centers.
+                </p>
+                <a
+                  href="https://github.com/naurahdila/bimbelhub.git"
+                  target="_blank"
+                  class="btn btn-outline"
+                  style="font-size: 0.8rem"
+                  >Live Demo</a
+                >
+              </div>
+            </article>
+
+            <article class="project-card styled-card">
+              <div class="project-img">
+                <img
+                  src="./img/figma.png"
+                  data-ph="UI Design"
+                  alt="UI Design"
+                />
+              </div>
+              <div class="project-info">
+                <h3>BimbelHub UI Figma</h3>
+                <p>High-fidelity mobile app prototype designed in Figma.</p>
+                <a href="https://www.figma.com/design/nZiI2Jy05WaT8r6HBxaS7D/BimbelHub.?node-id=1-2&t=08sl614yUemXKtkR-1" class="btn btn-outline" style="font-size: 0.8rem"
+                  >View Figma</a
+                >
+              </div>
+            </article>
+
+            <article class="project-card styled-card">
+              <div class="project-img">
+                <img src="./img/be.png" data-ph="API Code" alt="Backend API" />
+              </div>
+              <div class="project-info">
+                <h3> Pelaporan Prestasi Mahasiswa</h3>
+                <p>
+                  Robust RESTful API with Golang, JWT Auth, and Mongodb, Postgre database.
+                </p>
+                <a href="https://github.com/naurahdila/laporan_prestasi.git" class="btn btn-outline" style="font-size: 0.8rem"
+                  >GitHub Repo</a
+                >
+              </div>
+            </article>
+
+            <article class="project-card styled-card">
+              <div class="project-img">
+                <img src="./img/canva.png" data-ph="Canva Design" alt="Canva" />
+              </div>
+              <div class="project-info">
+                <h3>Visual Documentation</h3>
+                <p>
+                  Professional report layouts and presentation decks created in
+                  Canva.
+                </p>
+                <a href="#" class="btn btn-outline" style="font-size: 0.8rem"
+                  >View Design</a
+                >
+              </div>
+            </article>
           </div>
-          <div class="timeline reveal">
-            <div class="timeline-item">
-              <div class="role">Creative Designer</div>
-              <div class="org">Aulad Gemilang Indonesia • 2023 - Now</div>
-              <div class="muted">
-                - Designs and executes designs ranging from posters and
-                brochures to social media content, and Develops consistent
-                branding to strengthen the program's identity and expand
-                promotional reach.
+        </div>
+
+        <div class="carousel-controls">
+          <button class="nav-btn" id="prevBtn">&larr;</button>
+          <button class="nav-btn" id="nextBtn">&rarr;</button>
+        </div>
+      </div>
+    </section>
+
+<section id="experience" style="background: var(--muted)">
+      <div class="container">
+        <div class="section-title">
+          <h2>Experience</h2>
+          <span>Organizational Journey</span>
+        </div>
+
+        <div class="experience-box">
+          <div class="timeline-scroll-wrapper">
+            <div class="timeline">
+              
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Head of Creative Economy</div>
+                  <span class="org">HIMTI UNAIR • 2025</span>
+                  <div class="desc">
+                    Leading merchandise production, managing team of 10, and
+                    creative branding for the association.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">Tutor</div>
-              <div class="org">Aulad Gemilang Indonesia • 2022 - Now</div>
-              <div class="muted">
-                Teach and guide students using interactive learning methods,
-                provide regular evaluations, and create a positive and
-                motivating learning environment.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Head of Karang Taruna</div>
+                  <span class="org">Sememi, Surabaya • 2025 - Present</span>
+                  <div class="desc">
+                    Coordinating youth social programs and community events to
+                    improve local engagement.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">Head of Karang Taruna Sixde</div>
-              <div class="org">Sememi, Surabaya • 2025 - Now</div>
-              <div class="muted">
-                Leads the youth organizations at the neighborhood/village level
-                in designing, coordinating, and implementing social, cultural,
-                and youth programs.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Tutor at Aulad Gemilang Indonesia</div>
+                  <span class="org">Demak Jaya and Benowo, Surabaya • 2022 - Present</span>
+                  <div class="desc">
+                    Teach and guide students using interactive learning methods,
+                    provide regular evaluations, and create a positive and
+                    motivating learning environment.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">Head of the Creative Economy Department</div>
-              <div class="org">
-                Informatics Engineering Student Association • 2025 - Now
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Creative Designer</div>
+                  <span class="org">Aulad Gemilang Indonesia • 2023 - Present</span>
+                  <div class="desc">
+                    Designs branding assets and executes social media content
+                    strategies for educational programs.
+                  </div>
+                </div>
               </div>
-              <div class="muted">
-                Leads the planning and implementation of creative programs to
-                support the organization's branding, promotion, and product
-                marketing.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Competition Certificate</div>
+                  <span class="org">Sosial Media Marketing • 2024 January</span>
+                  <div class="desc">
+                    Designs branding assets and executes social media content
+                    strategies for educational programs.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">Linesman Division, East Java Pomprov III</div>
-              <div class="org">East Java • Mei - Juni 2025</div>
-              <div class="muted">
-                The Linesman Division of East Java Pomprov III ensures fair
-                play, manages match operations, and supports referees during
-                competitions.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Linesman Division</div>
+                  <span class="org">East Java Pomprov III • 2025</span>
+                  <div class="desc">
+                    Ensured fair play and managed match operations during the
+                    provincial championship.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">
-                Airlangga Badminton KSK Division Championship 2025
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Airlangga Badminton KSK Division Championship 2025</div>
+                  <span class="org">Airlangga University • 2025</span>
+                </div>
               </div>
-              <div class="org">Airlangga University • April - Juni 2025</div>
-              <div class="muted">
-                The Airlangga Badminton KSK Division organized and managed
-                operations for the 2025 Championship.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">KOOR PDD Teknik Cup 2024</div>
+                  <span class="org">Vocational Faculty • 2024</span>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">KOOR PDD Teknik Cup 2024</div>
-              <div class="org">
-                Vocational Faculty • September - Desember 2024
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">PDD HIMTI Cares Vol 2</div>
+                  <span class="org">Informatics Engineering • 2024</span>
+                </div>
               </div>
-              <div class="muted">
-                Coordinator of the PDD Division for Teknik Cup 2024, overseeing
-                planning and event execution.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">KSK Inisialisasi 2024</div>
+                  <span class="org">Informatics Engineering • 2024</span>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">PDD HIMTI Cares Vol 2</div>
-              <div class="org">Informatics Engineering • Mei - Juli 2024</div>
-              <div class="muted">
-                Member of the PDD Division for HIMTI Cares Vol. 2, Informatics
-                Engineering, assisting in program planning and execution.
+
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="role">Freelance URBN Coffee</div>
+                  <span class="org">URBN Coffee • 2025</span>
+                </div>
               </div>
-            </div>
-            <div class="timeline-item">
-              <div class="role">KSK Inisialisasi 2024</div>
-              <div class="org">
-                Informatics Engineering • Juni - Desember 2024
-              </div>
-              <div class="muted">
-                Member of the KSK Inisialisasi 2024 team, Informatics
-                Engineering, supporting event organization and coordination.
-              </div>
-            </div>
-            <div class="gallery reveal" aria-label="Galeri bukti foto">
-              <div class="grid" id="galleryGrid">
-                <img
-                  data-ph="Foto Organisasi 1"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 1"
-                  src="./img/agi.jpg"
-                />
-                <img
-                  data-ph="Foto Organisasi 2"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 2"
-                  src="./img/kartar.jpg"
-                />
-                <img
-                  data-ph="Foto Organisasi 3"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 3"
-                  src="./img/ekraf2.jpg"
-                />
-                <img
-                  data-ph="Foto Organisasi 4"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 4"
-                  src="./img/ekraf23.jpg"
-                />
-                <img
-                  data-ph="Kegiatan Lapangan"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 5"
-                  src="./img/biz.jpg"
-                />
-                <img
-                  data-ph="Rapat Tim"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 6"
-                  src="./img/pomprov.jpg"
-                />
-                <img
-                  data-ph="Presentasi"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 7"
-                  src="./img/line.jpg"
-                />
-                <img
-                  data-ph="Sertifikat"
-                  data-ph-size="600x400"
-                  alt="Bukti foto 8"
-                  src="./img/kami.jpg"
-                />
-              </div>
+
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="reflections">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">Reflections</h2>
-            <span class="section-sub"
-              >Learning journey, challenges, and highlights</span
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <h2>Let's Build Something Amazing</h2>
+          <p>
+            Whether you have a project in mind or just want to connect, I'm
+            always open to discussing new ideas and opportunities.
+          </p>
+          <div
+            style="
+              display: flex;
+              gap: 16px;
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a href="mailto:nrhdilaf13@gmail.com" class="btn btn-white"
+              >Send Email</a
+            >
+            <a href="https://wa.me/6282139521237" class="btn btn-transparent"
+              >Chat WhatsApp</a
             >
           </div>
-          <article class="reflection reveal">
-            <p>
-              During my time at Universitas Airlangga, I have grown not only
-              academically but also personally through various leadership and
-              organizational experiences. Being actively involved in student
-              organizations and events, such as managing divisions in sports and
-              community programs, has taught me the importance of teamwork,
-              communication, and responsibility. I have learned to balance
-              rigorous coursework with extracurricular commitments, developing
-              resilience, time management, and problem-solving skills. These
-              experiences have shaped me into a more confident, adaptable, and
-              proactive individual, ready to contribute positively to any
-              professional or community setting in the future.
-            </p>
-          </article>
         </div>
-      </section>
-
-      <section id="contact">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title">Contact</h2>
-            <span class="section-sub">Email • Sosial media • WhatsApp</span>
-          </div>
-          <div class="contact-grid">
-            <div class="contact-card reveal">
-              <div class="contact-row" style="margin-bottom: 10px">
-                <a
-                  class="btn btn-primary"
-                  id="contactEmail"
-                  href="mailto:nrhdilaf13@gmail.com"
-                  >Kirim Email</a
-                >
-                <a
-                  class="btn"
-                  id="contactWA"
-                  href="https://wa.me/6282139521237?text=Halo%20saya%20tertarik%20untuk%20terhubung"
-                  target="_blank"
-                  rel="noopener"
-                  >Chat WhatsApp</a
-                >
-                <a
-                  class="btn"
-                  id="contactLinkedIn"
-                  href="https://www.linkedin.com/in/naurah-dila-8346a4378"
-                  target="_blank"
-                  rel="noopener"
-                  >LinkedIn</a
-                >
-                <a
-                  class="btn"
-                  id="contactCV"
-                  href="https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link"
-                  target="_blank"
-                  rel="noopener"
-                  >Lihat CV</a
-                >
-              </div>
-              <form id="contactForm">
-                <div class="field">
-                  <label for="name">Nama</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Nama Anda"
-                    required
-                  />
-                </div>
-                <div class="field">
-                  <label for="message">Pesan</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tulis pesan singkat..."
-                    required
-                  ></textarea>
-                </div>
-                <div style="margin-top: 10px">
-                  <button class="btn btn-ghost" type="submit">
-                    Kirim via Email
-                  </button>
-                </div>
-              </form>
-            </div>
-            <aside class="reveal">
-              <div class="about-photos">
-                <img
-                  data-ph="Poster Kegiatan"
-                  data-ph-size="600x400"
-                  alt="Poster kegiatan"
-                  src="./img/agi2.jpg"
-                />
-                <img
-                  data-ph="Behind the Scenes"
-                  data-ph-size="600x400"
-                  alt="Di balik layar"
-                  src="./img/ti.jpg"
-                />
-                <img
-                  data-ph="Tim Inti"
-                  data-ph-size="600x400"
-                  alt="Foto tim inti"
-                  src="./img/tisl.jpg"
-                />
-                <img
-                  data-ph="Dokumentasi"
-                  data-ph-size="600x400"
-                  alt="Dokumentasi"
-                  src="./img/b.jpg"
-                />
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <div
-      class="lightbox"
-      id="lightbox"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Pratinjau gambar"
-    >
-      <img id="lightboxImg" alt="Gambar pratinjau" />
-    </div>
+      </div>
+    </section>
 
     <footer>
-      <div
-        class="container"
-        style="
-          display: flex;
-          justify-content: space-between;
-          gap: 12px;
-          flex-wrap: wrap;
-        "
-      >
-        <div>
-          © <span id="year"></span> Naurah Dila Fitriah • Universitas Airlangga
-        </div>
+      <div class="container">
+        &copy; <span id="year"></span> Naurah Dila Fitriah. All rights reserved.
       </div>
     </footer>
 
     <script>
-      const panda = document.querySelector(".fun-panda");
-      panda.addEventListener("click", (e) => {
-        const sparkle = document.createElement("div");
-        sparkle.className = "fun-sparkle";
-        sparkle.style.left = e.clientX + "px";
-        sparkle.style.top = e.clientY + "px";
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 900);
-      });
-      // -------------------------------
-      // KONFIGURASI LINK PRIBADI ANDA
-      // Ganti nilai berikut sesuai data Anda
-      const CONFIG = {
-        CV_URL:
-          "https://drive.google.com/file/d/1mxUG8ppclmnqWGaGEDml5sqn6WKCCI40/view?usp=drive_link",
-        LINKEDIN_URL: "https://www.linkedin.com/in/naurahdila/",
-        INTRO_VIDEO_URL: "https://youtu.be/FyCmEtf-vMg?si=xbMQDq34qFV-5548",
-        EMAIL: "mailto:nrhdilaf13@gmail.com",
-        WHATSAPP:
-          "https://wa.me/6282139521237?text=Halo%20saya%20tertarik%20untuk%20terhubung",
-      };
-      // -------------------------------
-
-      // Preferensi tema
-      const htmlEl = document.documentElement;
-      const themeToggle = document.getElementById("themeToggle");
-      const themeIcon = document.getElementById("themeIcon");
-
-      function setThemeIcon() {
-        const isDark = htmlEl.getAttribute("data-theme") === "dark";
-        themeIcon.innerHTML = isDark
-          ? `<svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.5"/></svg>`
-          : `<svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.5"/></svg>`;
+      // 1. Placeholder Gambar
+      function svgPlaceholder(w, h, text) {
+        const bg = "#27272a";
+        const fg = "#a1a1aa";
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="100%" height="100%" fill="${bg}"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="20" fill="${fg}">${text}</text></svg>`;
+        return "data:image/svg+xml;base64," + btoa(svg);
       }
-
-      function initTheme() {
-        const saved = localStorage.getItem("theme");
-        if (saved) {
-          htmlEl.setAttribute("data-theme", saved);
-        } else {
-          const prefersDark =
-            window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches;
-          htmlEl.setAttribute("data-theme", prefersDark ? "dark" : "light");
-        }
-        setThemeIcon();
-      }
-
-      themeToggle.addEventListener("click", () => {
-        const current = htmlEl.getAttribute("data-theme");
-        const next = current === "dark" ? "light" : "dark";
-        htmlEl.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-        setThemeIcon();
-      });
-
-      // Tahun footer
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // Set link CTA dan About
-      function wireLinks() {
-        const viewUrl = CONFIG.CV_URL;
-        const previewUrl = toDrivePreview(viewUrl);
-        const downloadUrl = toDriveDownload(viewUrl);
-
-        const setHref = (id, href) => {
-          const el = document.getElementById(id);
-          if (el && href) el.setAttribute("href", href);
+      document.querySelectorAll("img[data-ph]").forEach((img) => {
+        img.onerror = () => {
+          img.src = svgPlaceholder(400, 300, img.getAttribute("data-ph"));
         };
+        if (!img.getAttribute("src"))
+          img.src = svgPlaceholder(400, 300, img.getAttribute("data-ph"));
+      });
 
-        setHref("ctaCV", viewUrl);
-        setHref("openCV", viewUrl);
-        setHref("downloadCV", downloadUrl);
-        setHref("contactCV", previewUrl);
-
-        ["ctaLinkedIn", "aboutLinkedIn", "contactLinkedIn"].forEach((id) =>
-          setHref(id, CONFIG.LINKEDIN_URL)
-        );
-        ["ctaEmail", "contactEmail"].forEach((id) => setHref(id, CONFIG.EMAIL));
-        ["ctaWA", "contactWA"].forEach((id) => setHref(id, CONFIG.WHATSAPP));
-
-        const intro = document.getElementById("introVideoLink");
-        if (intro) intro.setAttribute("href", CONFIG.INTRO_VIDEO_URL);
-      }
-
-      // Embed CV
-      function loadCV() {
-        const frame = document.getElementById("cvFrame");
-        if (!frame) return;
-        frame.src = toDrivePreview(CONFIG.CV_URL);
-      }
-
-      // Placeholder gambar berbasis SVG (data URI)
-      function svgPlaceholder(w, h, label) {
-        const bg =
-          getComputedStyle(document.documentElement)
-            .getPropertyValue("--bg")
-            .trim() || "#e5e7eb";
-        const accent =
-          getComputedStyle(document.documentElement)
-            .getPropertyValue("--accent")
-            .trim() || "#d1bbff";
-        const text =
-          getComputedStyle(document.documentElement)
-            .getPropertyValue("--text")
-            .trim() || "#0a0a0a";
-        const safeLabel = String(label || "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
-        const svg = `
-        <svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>
-          <defs>
-            <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
-              <stop offset='0%' stop-color='${accent}' stop-opacity='0.22'/>
-              <stop offset='100%' stop-color='${accent}' stop-opacity='0.05'/>
-            </linearGradient>
-          </defs>
-          <rect width='100%' height='100%' fill='${bg}'/>
-          <rect x='0' y='0' width='100%' height='100%' fill='url(#g)'/>
-          <g font-family='system-ui, -apple-system, Segoe UI, Roboto' fill='${text}' text-anchor='middle'>
-            <text x='50%' y='50%' font-size='18' opacity='.7'>${safeLabel}</text>
-          </g>
-        </svg>`;
-        return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
-      }
-
-      function hydratePlaceholders(root = document) {
-        const imgs = root.querySelectorAll("img[data-ph]");
-        imgs.forEach((img) => {
-          const size = (img.getAttribute("data-ph-size") || "800x500").split(
-            "x"
-          );
-          const w = parseInt(size[0], 10) || 800;
-          const h = parseInt(size[1], 10) || 500;
-          const label = img.getAttribute("data-ph");
-          const hasSrc = img.getAttribute("src");
-          if (!hasSrc || img.dataset.forcePh === "true") {
-            img.src = svgPlaceholder(w, h, label);
-          }
-        });
-      }
-
-      // Fallback universal: bila gambar lokal gagal, tampilkan placeholder agar "muncul"
-      function ensureImageFallback() {
-        document.querySelectorAll("img").forEach((img) => {
-          img.addEventListener("error", () => {
-            const size = (img.getAttribute("data-ph-size") || "800x500").split(
-              "x"
-            );
-            const w = parseInt(size[0], 10) || img.naturalWidth || 800;
-            const h = parseInt(size[1], 10) || img.naturalHeight || 500;
-            const label =
-              img.getAttribute("alt") || img.getAttribute("data-ph") || "Image";
-            img.src = svgPlaceholder(w, h, label);
-          });
-        });
-      }
-
-      // Carousel logic
-      const track = document.getElementById("carouselTrack");
+      // 2. Logic Carousel
+      const track = document.getElementById("track");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
       let index = 0;
+
       function updateCarousel() {
-        const cards = track.querySelectorAll(".card");
-        const card = cards[0];
-        if (!card) return;
-        const gap = 16;
-        const width = card.getBoundingClientRect().width + gap;
-        const maxIndex = Math.max(
-          0,
-          cards.length -
-            Math.floor(
-              track.parentElement.getBoundingClientRect().width / width
-            )
-        );
-        if (index < 0) index = 0;
-        if (index > maxIndex) index = maxIndex;
-        track.style.transform = `translateX(${-index * width}px)`;
+        const cardWidth = track.children[0].getBoundingClientRect().width + 24;
+        track.style.transform = `translateX(-${index * cardWidth}px)`;
       }
-      document.getElementById("prevSlide").addEventListener("click", () => {
-        index--;
-        updateCarousel();
-      });
-      document.getElementById("nextSlide").addEventListener("click", () => {
-        index++;
-        updateCarousel();
-      });
-      window.addEventListener("resize", updateCarousel);
 
-      // Swipe support
-      (function enableSwipe() {
-        let startX = 0;
-        let isDown = false;
-        track.addEventListener("pointerdown", (e) => {
-          isDown = true;
-          startX = e.clientX;
-          track.setPointerCapture(e.pointerId);
-        });
-        track.addEventListener("pointerup", (e) => {
-          if (!isDown) return;
-          isDown = false;
-          const delta = e.clientX - startX;
-          if (Math.abs(delta) > 40) {
-            if (delta < 0) index++;
-            else index--;
-            updateCarousel();
-          }
-        });
-      })();
-
-      // Reveal on scroll
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("visible");
-              observer.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.12 }
-      );
-      document
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
-
-      // Lightbox
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightboxImg");
-      document.getElementById("galleryGrid").addEventListener("click", (e) => {
-        const img = e.target.closest("img");
-        if (!img) return;
-        lightboxImg.src = img.src;
-        lightbox.classList.add("open");
+      nextBtn.addEventListener("click", () => {
+        if (index < track.children.length - 1) {
+          index++;
+          updateCarousel();
+        }
       });
-      lightbox.addEventListener("click", () =>
-        lightbox.classList.remove("open")
-      );
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") lightbox.classList.remove("open");
+      prevBtn.addEventListener("click", () => {
+        if (index > 0) {
+          index--;
+          updateCarousel();
+        }
       });
 
-      // Form -> mailto
-      document.getElementById("contactForm").addEventListener("submit", (e) => {
+      // Drag functionality
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      track.addEventListener("mousedown", (e) => {
+        isDown = true;
+        startX = e.pageX - track.offsetLeft;
+        track.style.cursor = "grabbing";
+      });
+      track.addEventListener("mouseleave", () => {
+        isDown = false;
+        track.style.cursor = "grab";
+      });
+      track.addEventListener("mouseup", () => {
+        isDown = false;
+        track.style.cursor = "grab";
+      });
+      track.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
         e.preventDefault();
-        const name = document.getElementById("name").value.trim();
-        const msg = document.getElementById("message").value.trim();
-        const subject = encodeURIComponent(
-          "Pesan dari " + (name || "Pengunjung Portofolio")
-        );
-        const body = encodeURIComponent(
-          msg + "\n\n— dikirim dari situs portofolio"
-        );
-        window.location.href =
-          CONFIG.EMAIL + `?subject=${subject}&body=${body}`;
       });
 
-      // Init
-      initTheme();
-      hydratePlaceholders();
-      ensureImageFallback();
-      updateCarousel();
-      wireLinks();
-      loadCV();
+      // 3. Theme Toggle
+      const themeBtn = document.getElementById("themeToggle");
+      const html = document.documentElement;
 
-      // Re-hydrate placeholder saat tema ganti (agar gradien menyesuaikan)
-      const themeObserver = new MutationObserver(() => hydratePlaceholders());
-      themeObserver.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["data-theme"],
+      const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+      const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+      function updateIcon() {
+        const isDark = html.getAttribute("data-theme") === "dark";
+        themeBtn.innerHTML = isDark ? sunIcon : moonIcon;
+      }
+
+      themeBtn.addEventListener("click", () => {
+        const current = html.getAttribute("data-theme");
+        html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+        updateIcon();
       });
-
-      // Fungsi bantu: Drive ID, preview, download
-      function getDriveId(url) {
-        const m = String(url || "").match(/\/d\/([a-zA-Z0-9_-]+)/);
-        return m ? m[1] : null;
-      }
-      function toDrivePreview(url) {
-        const id = getDriveId(url);
-        return id ? `https://drive.google.com/file/d/${id}/preview` : url;
-      }
-      function toDriveDownload(url) {
-        const id = getDriveId(url);
-        return id
-          ? `https://drive.google.com/uc?export=download&id=${id}`
-          : url;
-      }
-
-      // ------------- FUN STUFF SCRIPT -------------
-      (() => {
-        // Sisipkan style
-        const styleEl = document.createElement("style");
-        styleEl.setAttribute("id", "fun-styles");
-        styleEl.textContent = `
-      :root {
-        --fun-z: 49;
-        --fun-z-fab: 60;
-        --spin-normal: 18s;
-        --spin-fast: 4s;
-        --fun-gap: 12px;
-        --fun-size: 28px;
-        --fun-accent: var(--accent);
-        --fun-text: var(--text);
-        --fun-bg: color-mix(in oklab, var(--bg) 92%, transparent);
-        --fun-border: var(--border);
-      }
-
-      /* Overlay utama (pointer-events none secara default agar tidak mengganggu klik)
-         Kecuali tombol/panda/ikon punya pointer-events: auto */
-      #fun-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: var(--fun-z);
-        pointer-events: none;
-      }
-
-      /* Gutter pinggir kiri/kanan tempat ikon-ikon “teknik” */
-      .fun-gutter {
-        position: absolute;
-        top: 72px; /* di bawah nav sticky */
-        bottom: 72px;
-        width: 56px;
-        display: grid;
-        align-content: space-between;
-        justify-items: center;
-        gap: var(--fun-gap);
-        padding: var(--fun-gap) 8px;
-        pointer-events: none;
-      }
-      .fun-left  { left:  0; }
-      .fun-right { right: 0; }
-
-      .fun-icon-wrap {
-        width: max(var(--fun-size), 24px);
-        height: max(var(--fun-size), 24px);
-        display: grid;
-        place-items: center;
-        border-radius: 12px;
-        background: var(--fun-bg);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
-        pointer-events: auto; /* boleh di-hover untuk animasi */
-      }
-
-      .fun-icon {
-        width: 20px;
-        height: 20px;
-        color: var(--fun-text);
-        opacity: .9;
-        transform-origin: 50% 50%;
-        animation: fun-spin var(--spin-normal) linear infinite;
-      }
-      .fun-icon-wrap:hover .fun-icon {
-        animation-duration: var(--spin-fast);
-      }
-
-      @keyframes fun-spin { to { transform: rotate(360deg); } }
-
-      /* Tombol mengambang: Email */
-      .fun-fab {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: var(--fun-z-fab);
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px; /* dikurangi padding-nya agar tidak terlalu besar di layar kecil */
-        border-radius: 999px;
-        background: var(--fun-accent);
-        color: #111;
-        border: 1px solid transparent;
-        box-shadow: var(--shadow);
-        font-weight: 800;
-        pointer-events: auto;
-      }
-      .fun-fab:focus-visible {
-        outline: 2px solid var(--fun-accent);
-        outline-offset: 2px;
-      }
-
-      /* Panel demo + tombol pembuka */
-      .fun-demo-toggle {
-        position: fixed;
-        left: 18px;
-        bottom: 18px;
-        z-index: var(--fun-z-fab);
-        pointer-events: auto;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        background: var(--fun-bg);
-        color: var(--fun-text);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
-        font-weight: 700;
-      }
-      .fun-demo-panel {
-        position: fixed;
-        left: 18px;
-        bottom: 68px;
-        z-index: var(--fun-z-fab);
-        min-width: 240px;
-        padding: 12px;
-        border-radius: 12px;
-        background: var(--fun-bg);
-        border: 1px solid var(--fun-border);
-        box-shadow: var(--shadow);
-        display: none;
-        pointer-events: auto;
-      }
-      .fun-demo-panel.open { display: grid; gap: 8px; }
-      .fun-demo-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 10px;
-        border-radius: 10px;
-        border: 1px solid var(--fun-border);
-        background: color-mix(in oklab, var(--bg) 96%, transparent);
-        color: var(--fun-text);
-      }
-
-      /* Panda berjalan menyusuri web */
-/* Panda fixed button */
- .fun-panda {
-      position: fixed;
-      bottom: 24px;
-      left: -80px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--fun-bg);
-      border: 1px solid var(--fun-border);
-      box-shadow: var(--shadow);
-      z-index: var(--fun-z);
-      pointer-events: auto;
-      cursor: pointer;
-      animation: panda-walk 16s linear infinite alternate;
-  }
-
-  .fun-panda[data-dir="left"] {
-      animation-direction: alternate-reverse;
-  }
-
-  /* Ganti icon panda jadi img */
-  .fun-panda img {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-  }
-
-  @keyframes panda-walk {
-      0%   { transform: translateX(-10vw) translateY(0); }
-      50%  { transform: translateX(60vw) translateY(-2vh); }
-      100% { transform: translateX(92vw) translateY(0); }
-  }
-
-  /* Sparkle ketika diklik */
-  .fun-sparkle {
-      position: fixed;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 30%, var(--fun-accent), transparent 60%),
-        radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--fun-accent) 70%, transparent), transparent 70%);
-      opacity: .85;
-      transform: translate(-50%, -50%) scale(.6);
-      pointer-events: none;
-      z-index: var(--fun-z-fab);
-      animation: sparkle-pop .9s ease-out forwards;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
-  }
-
-  @keyframes sparkle-pop {
-      60% { transform: translate(-50%, -50%) scale(1.35) rotate(20deg); opacity: .9; }
-      100% { transform: translate(-50%, -50%) scale(.1) rotate(140deg); opacity: 0; }
-  }
-
-  /* Kurangi gerak jika prefer-reduced-motion */
-  @media (prefers-reduced-motion: reduce) {
-      .fun-icon, .fun-panda { animation: none !important; }
-      .fun-sparkle { display: none !important; }
-  }
-        `;
-        document.head.appendChild(styleEl);
-
-        // Buat overlay
-        const overlay = document.createElement("div");
-        overlay.id = "fun-overlay";
-
-        // Gutter kiri/kanan
-        const left = document.createElement("div");
-        const right = document.createElement("div");
-        left.className = "fun-gutter fun-left";
-        right.className = "fun-gutter fun-right";
-        overlay.appendChild(left);
-        overlay.appendChild(right);
-
-        // Util: buat ikon SVG sederhana (gear, atom, chip)
-        const svgNS = "http://www.w3.org/2000/svg";
-        function makeIcon(pathD, viewBox = "0 0 24 24") {
-          const wrap = document.createElement("div");
-          wrap.className = "fun-icon-wrap";
-          const svg = document.createElementNS(svgNS, "svg");
-          svg.setAttribute("class", "fun-icon");
-          svg.setAttribute("viewBox", viewBox);
-          svg.setAttribute("fill", "none");
-          const path = document.createElementNS(svgNS, "path");
-          path.setAttribute("d", pathD);
-          path.setAttribute("stroke", "currentColor");
-          path.setAttribute("stroke-width", "1.6");
-          path.setAttribute("stroke-linecap", "round");
-          path.setAttribute("stroke-linejoin", "round");
-          svg.appendChild(path);
-          wrap.appendChild(svg);
-          return wrap;
-        }
-
-        // Beberapa ikon “teknik”
-        const ICONS = [
-          // gear
-          "M12 8a4 4 0 1 0 0 8a4 4 0 0 0 0-8Zm9 4l-2 1l.4 2.3l-2.3.4l-1 2l-2-1l-2 1l-1-2l-2.3-.4L5 13l-2-1l2-1l-.4-2.3l2.3-.4l1-2l2 1l2-1l1 2l2.3.4L19 11l2 1z",
-          // atom
-          "M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0 M2 12c0-5.5 4.5-10 10-10s10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12z",
-          // chip
-          "M7 7h10v10H7z M12 2v3m0 14v3M2 12h3m14 0h3 M5 5l2 2m10 10l2 2M19 5l-2 2M5 19l2-2",
-          // bolt
-          "M13 2L6 14h5l-2 8L18 10h-5z",
-          // bracket {}
-          "M9 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2v0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2 M15 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2v0a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2",
-        ];
-
-        function seedGutter(colEl, count = 5) {
-          for (let i = 0; i < count; i++) {
-            const ico = makeIcon(ICONS[i % ICONS.length]);
-            colEl.appendChild(ico);
-          }
-        }
-        seedGutter(left, 5);
-        seedGutter(right, 5);
-
-        // Panda berjalan
-        const pandaBtn = document.createElement("button");
-        pandaBtn.className = "fun-panda";
-        pandaBtn.setAttribute("type", "button");
-        pandaBtn.setAttribute(
-          "aria-label",
-          "Panda berjalan – klik untuk ubah arah"
-        );
-        pandaBtn.setAttribute(
-          "title",
-          "Klik untuk ubah arah • Tekan spasi untuk lompat"
-        );
-
-        // SVG kepala panda mini (ringan)
-        pandaBtn.innerHTML = `
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <circle cx="32" cy="34" r="18" fill="currentColor" opacity=".95"></circle>
-            <circle cx="22" cy="20" r="8" fill="currentColor"></circle>
-            <circle cx="42" cy="20" r="8" fill="currentColor"></circle>
-            <circle cx="26" cy="34" r="4" fill="#fff"></circle>
-            <circle cx="38" cy="34" r="4" fill="#fff"></circle>
-            <circle cx="26" cy="34" r="2" fill="#111"></circle>
-            <circle cx="38" cy="34" r="2" fill="#111"></circle>
-            <ellipse cx="32" cy="42" rx="5" ry="3" fill="#111"></ellipse>
-          </svg>
-        `;
-
-        let dir = "right";
-        function toggleDirection() {
-          dir = dir === "right" ? "left" : "right";
-          pandaBtn.setAttribute("data-dir", dir === "left" ? "left" : "right");
-        }
-        pandaBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleDirection();
-          // efek “lompat kecil”
-          pandaBtn.animate(
-            [
-              {
-                transform:
-                  getComputedStyle(pandaBtn).transform + " translateY(0)",
-              },
-              {
-                transform:
-                  getComputedStyle(pandaBtn).transform + " translateY(-12px)",
-              },
-              {
-                transform:
-                  getComputedStyle(pandaBtn).transform + " translateY(0)",
-              },
-            ],
-            { duration: 420, easing: "ease-out" }
-          );
-        });
-        pandaBtn.addEventListener("keydown", (e) => {
-          if (e.key === " " || e.key === "Enter") {
-            e.preventDefault();
-            pandaBtn.click();
-          }
-        });
-
-        // FAB Email (mailto langsung)
-        const fabEmail = document.createElement("a");
-        fabEmail.className = "fun-fab";
-        fabEmail.href =
-          "mailto:nrhdilaf13@gmail.com?subject=" +
-          encodeURIComponent("Halo Naurah — dari situs portofolio") +
-          "&body=" +
-          encodeURIComponent("Hai Naurah,%0D%0A%0D%0ASaya ingin terhubung...");
-        fabEmail.setAttribute("aria-label", "Kirim Email ke Naurah");
-        fabEmail.innerHTML = `
-          <svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="5" width="18" height="14" rx="2" stroke="#111" stroke-width="1.5"/>
-            <path d="M3 7l9 7 9-7" stroke="#111" stroke-width="1.5"/>
-          </svg>
-          <span>Email</span>
-        `;
-
-        // Panel Demo
-        const demoBtn = document.createElement("button");
-        demoBtn.className = "fun-demo-toggle";
-        demoBtn.type = "button";
-        demoBtn.setAttribute("aria-expanded", "false");
-        demoBtn.innerHTML = `
-          <svg class="icon-20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
-          Demo
-        `;
-        const demoPanel = document.createElement("div");
-        demoPanel.className = "fun-demo-panel";
-        demoPanel.setAttribute("role", "menu");
-        demoPanel.innerHTML = `
-          <a class="fun-demo-link" role="menuitem" target="_blank" rel="noopener" href="https://naurahdila.github.io/N.O.R.A/">
-            <svg class="icon-16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14 3h7v7M10 14L21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            N.O.R.A (Live)
-          </a>
-          <a class="fun-demo-link" role="menuitem" target="_blank" rel="noopener" href="https://naurahdila.github.io/bimbelhub/">
-            <svg class="icon-16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14 3h7v7M10 14L21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            BimbelHub (Live)
-          </a>
-          <a class="fun-demo-link" role="menuitem" target="_blank" rel="noopener" href="https://www.figma.com/design/nZiI2Jy05WaT8r6HBxaS7D/BimbelHub.?node-id=1-2&t=lW6zNKSMsKrCovav-1">
-            <svg class="icon-16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 2v20M5 7h14M5 17h14" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-            Figma BimbelHub
-          </a>
-        `;
-        demoBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const open = demoPanel.classList.toggle("open");
-          demoBtn.setAttribute("aria-expanded", String(open));
-        });
-        document.addEventListener("click", () => {
-          if (demoPanel.classList.contains("open")) {
-            demoPanel.classList.remove("open");
-            demoBtn.setAttribute("aria-expanded", "false");
-          }
-        });
-
-        // Tambah ke DOM
-        document.body.appendChild(overlay);
-        overlay.appendChild(left);
-        overlay.appendChild(right);
-        overlay.appendChild(pandaBtn);
-        document.body.appendChild(fabEmail);
-        document.body.appendChild(demoBtn);
-        document.body.appendChild(demoPanel);
-
-        // Animasi klik universal (sparkle)
-        document.addEventListener(
-          "click",
-          (e) => {
-            // Abaikan jika reduced motion
-            const rm =
-              window.matchMedia &&
-              window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            if (rm) return;
-
-            const s = document.createElement("span");
-            s.className = "fun-sparkle";
-            s.style.left = e.clientX + "px";
-            s.style.top = e.clientY + "px";
-            document.body.appendChild(s);
-            setTimeout(() => s.remove(), 900);
-          },
-          { capture: true }
-        );
-      })();
-      // ------------- END FUN STUFF -------------
-
-      // CHANGE: Toggle navbar mobile (hamburger)
-      (function mobileNav() {
-        const navToggle = document.getElementById("navToggle");
-        const navLinks = document.getElementById("navLinks");
-        const scrim = document.getElementById("navScrim");
-
-        /* CHANGE: Samakan breakpoint JS dengan CSS: 1024px */
-        const mq = window.matchMedia("(max-width: 1024px)");
-
-        function closeNav() {
-          if (!navLinks) return; // Tambahan guard clause
-          navLinks.classList.remove("open");
-          document.body.classList.remove("nav-open");
-          navToggle?.setAttribute("aria-expanded", "false");
-          scrim?.classList.remove("show");
-        }
-        function openNav() {
-          if (!navLinks) return; // Tambahan guard clause
-          navLinks.classList.add("open");
-          document.body.classList.add("nav-open");
-          navToggle?.setAttribute("aria-expanded", "true");
-          scrim?.classList.add("show");
-        }
-        function toggleNav() {
-          const willOpen = !navLinks.classList.contains("open");
-          willOpen ? openNav() : closeNav();
-        }
-
-        navToggle?.addEventListener("click", (e) => {
-          e.stopPropagation(); // Mencegah event bubble ke scrim
-          toggleNav();
-        });
-        scrim?.addEventListener("click", closeNav);
-
-        // Tutup saat klik salah satu link
-        navLinks?.querySelectorAll("a").forEach((a) => {
-          a.addEventListener("click", closeNav);
-        });
-
-        // Tutup saat tekan ESC
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") closeNav();
-        });
-
-        /* CHANGE: Tutup menu ketika melebar ke desktop (>1024px) */
-        mq.addEventListener?.("change", (e) => {
-          if (!e.matches) closeNav();
-        });
-        window.addEventListener("resize", () => {
-          if (!mq.matches) closeNav();
-        });
-      })();
-
-      // CHANGE: Tambah skrip carousel: drag + tombol, aman terhadap listener ganda
-      (function () {
-        const byId = (id) => document.getElementById(id);
-        const prev = byId("prevSlide");
-        const next = byId("nextSlide");
-        let track = byId("carouselTrack");
-        if (!track || !prev || !next) return;
-
-        // Hilangkan listener lama (jika ada blok skrip lain) dengan replace node
-        try {
-          const clone = track.cloneNode(true);
-          track.parentNode.replaceChild(clone, track);
-          track = clone;
-        } catch {}
-
-        const gap = 16; // sesuai CSS .carousel-track gap
-        const cardEl = track.querySelector(".card");
-        if (!cardEl) return;
-
-        const cardWidth = () => cardEl.getBoundingClientRect().width + gap;
-        const maxIndex = () => Math.max(0, track.children.length - 1);
-
-        let index = 0;
-        const goTo = (i, animate = true) => {
-          index = Math.max(0, Math.min(i, maxIndex()));
-          track.style.transition = animate
-            ? "transform .5s cubic-bezier(0.22,1,0.36,1)"
-            : "none";
-          track.style.transform = `translateX(${-index * cardWidth()}px)`;
-        };
-
-        // Tombol navigasi
-        prev.addEventListener("click", () => goTo(index - 1));
-        next.addEventListener("click", () => goTo(index + 1));
-        window.addEventListener("resize", () => goTo(index, false));
-
-        // Drag/geser dengan Pointer Events
-        let down = false,
-          startX = 0,
-          startT = 0,
-          pid = null;
-        const parseTranslate = () => {
-          const m = track.style.transform.match(/-?\d+\.?\d*/g);
-          return m ? parseFloat(m[0]) : 0;
-        };
-
-        track.style.touchAction = "pan-y";
-        track.addEventListener("pointerdown", (e) => {
-          down = true;
-          pid = e.pointerId;
-          track.setPointerCapture(pid);
-          startX = e.clientX;
-          startT = parseTranslate();
-          track.style.transition = "none";
-        });
-
-        track.addEventListener("pointermove", (e) => {
-          if (!down) return;
-          const dx = e.clientX - startX;
-          track.style.transform = `translateX(${startT + dx}px)`;
-        });
-
-        const end = () => {
-          if (!down) return;
-          down = false;
-          try {
-            track.releasePointerCapture(pid);
-          } catch {}
-          const cur = parseTranslate();
-          const delta = cur - startT;
-          const threshold = cardWidth() * 0.25;
-          if (delta < -threshold) goTo(index + 1);
-          else if (delta > threshold) goTo(index - 1);
-          else goTo(index);
-        };
-
-        ["pointerup", "pointercancel", "lostpointercapture"].forEach((ev) =>
-          track.addEventListener(ev, end)
-        );
-
-        // Aksesibilitas: keyboard
-        track.setAttribute("tabindex", "0");
-        track.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowLeft") {
-            e.preventDefault();
-            goTo(index - 1);
-          }
-          if (e.key === "ArrowRight") {
-            e.preventDefault();
-            goTo(index + 1);
-          }
-        });
-
-        // Inisialisasi
-        goTo(0);
-      })();
+      updateIcon();
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
